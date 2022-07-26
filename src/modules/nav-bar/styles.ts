@@ -35,6 +35,8 @@ export const LogoContainer = styled.div`
 export const MenuItemsContainer = styled.div`
     display:flex;
     gap: 30px;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
 `;
 export const MenuItem = styled.button`

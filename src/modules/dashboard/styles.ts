@@ -13,6 +13,10 @@ export const MainPartContainer = styled.div`
     width: 100vw;
     justify-content: center;
     gap: 70px;
+    @media screen and (max-width: 700px){
+        flex-direction: column;;
+        align-items: center;
+    }
 `;
 export const InputForm = styled.div`
     display:flex;
@@ -29,25 +33,35 @@ export const LogImage = styled.img`
     object-fit: cover;
 `;
 export const InputLine = styled.input`
-    width: 300px;
-    height: 50px;
     font-size: 15px;
+    width: 453px;
+    height: 47px;
+    opacity: .8;
+    border: 2px solid #43597A;
+    background-color: #1A365E;
+    background: linear-gradient(90deg, rgba(26, 54, 94, 0.6) -3.84%, rgba(26, 54, 94, 0.5) 133.08%);
+    backdrop-filter: blur(60px);
     outline: 0;
-    border: 0;
     border-radius: 5px;
+    color: #08D9F2;
     padding: 0 10px;
     clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
     -webkit-clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
-    color:darkblue;
-    background-color: cyan;
+    ::placeholder{
+        color: #08D9F2;
+    }
+    @media screen and (max-width: 700px){
+        width: 80%;
+    }
 
 `;
 export const InputLineWrapper = styled.div`
-    width: 300px;
+    width: 473px;
+    font-size: 15px;
+   
     display:flex;
     justify-content: flex-start;
     align-items:center;
-    height: 50px;
     font-size: 15px;
     outline: 0;
     border: 0;
@@ -56,23 +70,40 @@ export const InputLineWrapper = styled.div`
     clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
     -webkit-clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
     color:darkblue;
-    background-color: cyan;
+    @media screen and (max-width: 700px){
+        width: 80%;
+    }
 
+`;
+export const SelectionLine = styled.div`
+    border-radius: 10px;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    display: block;
+    border: 2px solid #43597A;
+    background: linear-gradient(90deg, rgba(26, 54, 94, 0.6) -3.84%, rgba(26, 54, 94, 0.5) 133.08%);
+    color: #08D9F2;
+    clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
+    -webkit-clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
+    
 `;
 export const SelectForm = styled.select`
     margin-left: 10px;
+  
     outline: 0;
-    padding: 10px;
-    background-color: black;
-    border-radius: 10px;
     border: 0;
-    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    background: transparent;
+    color: #08D9F2;
 `;
 export const PhotoInput = styled.input`
     margin-left: 10px;
     outline: 0;
     padding: 5px;
-    background-color: black;
+    background-color: transparent;
     border-radius: 10px;
     border: 0;
     color: white;
@@ -86,7 +117,7 @@ export const ListingButton = styled.input`
     height: 70px;
     width: 250px;
     border-radius: 10px;
-    background-color:cyan;
+    background-color:#2CA0E2;
     color: white;
     clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
     -webkit-clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);

@@ -114,11 +114,10 @@ export const BuyButton = styled.button`
     outline: 0;
     border: 0;
     background-color: #2CA0E2;
+    color: white;
     opacity: .9;
     font-size: 15px;
     padding: 10px 40px;
-    color: white;
-
     clip-path: polygon(0 19%, 22% 0, 100% 0, 100% 80%, 75% 100%, 0 100%);
     -webkit-clip-path: polygon(0 19%, 22% 0, 100% 0, 100% 80%, 75% 100%, 0 100%);
     border-radius: 5px;

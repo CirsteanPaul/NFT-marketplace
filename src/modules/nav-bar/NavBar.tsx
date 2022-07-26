@@ -16,10 +16,11 @@ const NavBar = () => {
             </HomeIconContainer>
             <MenuItemsContainer>
             <Link to="/market-place"><MenuItem>WL Spots</MenuItem></Link>
-            <MenuItem>Merch</MenuItem>
-            <MenuItem>NFTs</MenuItem>
-            <MenuItem>Others</MenuItem>
+            <Link to="/merchs"><MenuItem>Merch</MenuItem></Link>
+            <Link to="/nfts"><MenuItem>NFTs</MenuItem></Link>
+            <Link to="/others"><MenuItem>Others</MenuItem></Link>
             {isAdmin && <Link to="/dashboard"><MenuItem>Dashboard</MenuItem></Link>}
+            {isAdmin && <Link to="/transactions"><MenuItem>Transactions </MenuItem></Link>}
             </MenuItemsContainer>
         </MenuContainer>
         <LogoContainer>

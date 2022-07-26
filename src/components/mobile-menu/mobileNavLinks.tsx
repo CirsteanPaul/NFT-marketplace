@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useAppSelector } from "../../store";
-import { contractInfoIsAdminSelector } from "../../store/selectors/contract-info-selectors";
+import { ConnectButton } from "../../modules/top-menu/styles";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { disconnectBlockchainInfo, fecthBlockchainInfoAsyncAction } from "../../store/actions/blockchain-actions";
+import { blockchainIsConnectedSelector } from "../../store/selectors/blockchain-selectors";
+import { contractInfoBalanceSelector, contractInfoIsAdminSelector } from "../../store/selectors/contract-info-selectors";
 import { MenuToggle } from "./menuToggle";
 
 const NavLinksContainer = styled.div`
@@ -61,23 +64,29 @@ const Marginer = styled.div`
 export function MobileNavLinks(props: any) {
   const [isOpen, setOpen] = useState(false);
   const isAdmin = useAppSelector(contractInfoIsAdminSelector);
+  const balance = useAppSelector(contractInfoBalanceSelector);
+  const isConnected = useAppSelector(blockchainIsConnectedSelector);
+  const dispatch = useAppDispatch();
   return (
     <NavLinksContainer>
       <MenuToggle isOpen={isOpen} toggle={() => setOpen(!isOpen)} />
       {isOpen && (
         <LinksWrapper>
           <LinkItem>
+          <Link to="/market-place"><ItemLink>WL Spots</ItemLink></Link>
+          </LinkItem>
+          <LinkItem>
+            <Link to="/merchs"><ItemLink>Merch</ItemLink></Link>
+            </LinkItem>
+            <LinkItem>
+            <Link to="/nfts"><ItemLink>NFTs</ItemLink></Link>
+            </LinkItem>
+            <LinkItem>
+            <Link to="/others"><ItemLink>Others</ItemLink></Link>
+            </LinkItem>
+            <LinkItem>
             <Link to="#"><ItemLink>WL Spots</ItemLink></Link>
-          </LinkItem>
-          <LinkItem>
-            <Link to="#"><ItemLink>Merch</ItemLink></Link>
-          </LinkItem>
-          <LinkItem>
-            <Link to="#"><ItemLink>NFTs</ItemLink></Link>
-          </LinkItem>
-          <LinkItem>
-            <Link to="#"><ItemLink>Others</ItemLink></Link>
-          </LinkItem>
+            </LinkItem>
           <LinkItem>
             <Link to="#"><ItemLink>Website</ItemLink></Link>
           </LinkItem>
@@ -87,6 +96,12 @@ export function MobileNavLinks(props: any) {
           <LinkItem>
             {isAdmin && <Link to="/dashboard"><ItemLink>Dashboard</ItemLink></Link>}
           </LinkItem>
+          <LinkItem>
+          {`Balance: ${balance} tokens`}
+            
+          </LinkItem>
+                {isConnected ? <ConnectButton onClick={() => dispatch(disconnectBlockchainInfo())}>Disconnect</ConnectButton>
+                : <ConnectButton onClick={() => dispatch(fecthBlockchainInfoAsyncAction())}>Connect</ConnectButton>}
           <Marginer />
         </LinksWrapper>
       )}

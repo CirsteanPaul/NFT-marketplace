@@ -10,7 +10,7 @@ import { ButtonsSection, BuyButton, DeleteButton, LateItemData, LatestItemImage,
 type Props = {
     product: IMarketProduct;
 }
-const SellingItem = (props: Props) => {
+const BidItem = (props: Props) => {
     const {amount, photo, price, name, id } = props.product;
     const dispatch = useAppDispatch();
     const isAdmin = useAppSelector(contractInfoIsAdminSelector);
@@ -54,4 +54,4 @@ const SellingItem = (props: Props) => {
   )
 }
 
-export default SellingItem;
+export default BidItem;

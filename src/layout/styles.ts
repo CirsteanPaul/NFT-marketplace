@@ -10,6 +10,7 @@ export const MainContentContainer = styled.main<{scrollable: boolean}>`
     width: 100%;
     position: relative;
     overflow: ${props => props.scrollable ? "scroll" : "hidden"};
+    overflow: scroll;
     overflow-x: hidden;
     flex-direction: column;
     @media screen and (max-width: 990px){
@@ -47,8 +48,8 @@ export const ShadowColorTopLeft = styled.div`
     position: absolute;
     width: 469.16px;
     height: 819.21px;
-    left: 1vw;
-    top: -50vh;
+    left: -10vw;
+    top: -75vh;
     background: #F268EA;
     overflow: hidden;
     border: 1px solid #000000;

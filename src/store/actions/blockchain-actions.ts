@@ -6,7 +6,6 @@ import { BLOCKCHAIN__SET_CONTRACT, BLOCKCHAIN__SET_LOADING, BLOCKCHAIN__SPEND_TO
 import { blockchainContractSelector } from "../selectors/blockchain-selectors";
 import { fecthContractInfo, setContractInfoBalance, setContractInfoOwner } from "./contract-info-actions";
 
-
 export const setBlockchainLoading = createAction<boolean>(BLOCKCHAIN__SET_LOADING);
 export const setBlockchainContract = createAction<ethers.Contract>(BLOCKCHAIN__SET_CONTRACT);
 export const setBlockchainProvider = createAction<any>(BLOCKCHAIN__SET_PROVIDER);
@@ -48,8 +47,8 @@ export const spendTokensAsyncAction = createAsyncThunk(BLOCKCHAIN__SPEND_TOKENS,
         const priceInWei = ethers.utils.parseUnits(data.toString(), 'wei');
         console.log(priceInWei);
         if(contract){
-            const tx = await contract.spendToken(priceInWei);
-            tx.wait()
+            // const tx = await contract.spendToken(priceInWei);
+            // tx.wait()
             thunkApi.dispatch(fecthContractInfo());
             thunkApi.dispatch(setBlockchainTransactionStatus(1));
         }
