@@ -36,10 +36,10 @@ const BuyingModal = () => {
                 });
             return;
            }
-            //dispatch(spendTokensAsyncAction(selectedAmount));
+            dispatch(spendTokensAsyncAction(selectedAmount));
         }
         else{
-            // dispatch(spendTokensAsyncAction(selectedAmount * price));
+            dispatch(spendTokensAsyncAction(selectedAmount * price));
         }
         dispatch(setMarketProductHowMuchAction(selectedAmount));
         dispatch(setBlockchainTransactionStatus(1));

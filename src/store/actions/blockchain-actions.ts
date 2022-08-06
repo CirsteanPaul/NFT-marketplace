@@ -45,7 +45,6 @@ export const spendTokensAsyncAction = createAsyncThunk(BLOCKCHAIN__SPEND_TOKENS,
     thunkApi.dispatch(setBlockchainTransactionLoading(true));
     try{
         const priceInWei = ethers.utils.parseUnits(data.toString(), 'wei');
-        console.log(priceInWei);
         if(contract){
             const tx = await contract.spendToken(priceInWei);
             tx.wait()

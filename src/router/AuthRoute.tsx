@@ -12,12 +12,12 @@ const AuthRoute = ({children}: AuthRouteProps) =>{
     const isConnected = useAppSelector(blockchainIsConnectedSelector);
     useEffect(() =>{
         
-        // if(!isConnected || !isAdmin ) {
-        //     navigate('/');
+        if(!isConnected || !isAdmin ) {
+            navigate('/');
             
-        //  }
+         }
     },[isAdmin, isConnected, navigate])
-    return children
     if(!isConnected || !isAdmin) return null;
+    return children
 }
 export default AuthRoute;
