@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { merchPage, nftPage, otherPage, wlSpotsPage } from '../../../constants/routing'
 import { useAppSelector } from '../../../store'
 import { marketPlaceLatestItemSelector } from '../../../store/selectors/market-products-selectors'
 import { LateItemData, LatestItemImage, LatestItemName, LatestItemPrice, LatestItemSectionContainer, LatestItemTitle, LatestItemTokenPrice } from './styles'
@@ -9,12 +10,12 @@ const LatestItem = () => {
     const navigate = useNavigate();
     const handleClick = () =>{
         if(latestItem?.type === 1)
-            navigate('/market-place');
+            navigate(wlSpotsPage);
         else if(latestItem?.type === 2)
-            navigate('/merchs');
+            navigate(merchPage);
         else if(latestItem?.type === 3)
-            navigate('/nfts');
-        else navigate('/others');
+            navigate(nftPage);
+        else navigate(otherPage);
     }
     if(!latestItem) return null;
   return (

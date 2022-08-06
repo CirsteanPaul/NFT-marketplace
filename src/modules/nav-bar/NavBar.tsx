@@ -6,6 +6,7 @@ import {ReactComponent as RockstarLogo} from './rockstar-logo.svg'
 import { Link, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../store';
 import { contractInfoIsAdminSelector } from '../../store/selectors/contract-info-selectors';
+import { dashboardPage, mainPage, merchPage, nftPage, otherPage, transactionPage, wlSpotsPage } from '../../constants/routing';
 
 const NavBar = () => {
     const location = useLocation();
@@ -14,17 +15,17 @@ const NavBar = () => {
     <NavBarContainer>
         <MenuContainer>
             <HomeIconContainer>
-            {location.pathname === '/' ? 
-             <Link to='/'><RedHomeIcon /></Link> :
-             <Link to='/'><HomeIcon /></Link>}
+            {location.pathname === mainPage ? 
+             <Link to={mainPage}><RedHomeIcon /></Link> :
+             <Link to={mainPage}><HomeIcon /></Link>}
             </HomeIconContainer>
             <MenuItemsContainer>
-            <Link to="/market-place"><MenuItem active = {location.pathname === '/market-place'}>WL Spots</MenuItem></Link>
-            <Link to="/merchs"><MenuItem active = {location.pathname === '/merchs'}>Merch</MenuItem></Link>
-            <Link to="/nfts"><MenuItem active = {location.pathname === '/nfts'}>NFTs</MenuItem></Link>
-            <Link to="/others"><MenuItem active = {location.pathname === '/others'}>Others</MenuItem></Link>
-            {isAdmin && <Link to="/dashboard"><MenuItem active = {location.pathname === '/dashboard'}>Dashboard</MenuItem></Link>}
-            {isAdmin && <Link to="/transactions"><MenuItem active = {location.pathname === '/transactions'}>Transactions </MenuItem></Link>}
+            <Link to={wlSpotsPage}><MenuItem active = {location.pathname === wlSpotsPage}>WL Spots</MenuItem></Link>
+            <Link to={merchPage}><MenuItem active = {location.pathname === merchPage}>Merch</MenuItem></Link>
+            <Link to={nftPage}><MenuItem active = {location.pathname === nftPage}>NFTs</MenuItem></Link>
+            <Link to={otherPage}><MenuItem active = {location.pathname === otherPage}>Others</MenuItem></Link>
+            {isAdmin && <Link to={dashboardPage}><MenuItem active = {location.pathname === dashboardPage}>Dashboard</MenuItem></Link>}
+            {isAdmin && <Link to={transactionPage}><MenuItem active = {location.pathname === transactionPage}>Transactions </MenuItem></Link>}
             </MenuItemsContainer>
         </MenuContainer>
         <LogoContainer>

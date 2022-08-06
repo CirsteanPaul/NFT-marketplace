@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import BidItem from '../../components/bid-item'
 import BuyingModal from '../../components/buying-modal'
 import SellingItem from '../../components/selling-item'
+import { merchPage, nftPage, otherPage, wlSpotsPage } from '../../constants/routing'
 import Layout from '../../layout'
 import { useAppDispatch, useAppSelector } from '../../store'
 import { setBlockchainTransactionStatus } from '../../store/actions/blockchain-actions'
@@ -27,24 +28,24 @@ const MarketPlace = () => {
 
     },[dispatch]);
     const titleMarket = useMemo(() =>{
-        if(location.pathname === "/market-place")
+        if(location.pathname === wlSpotsPage)
         return 'WL spots';
-    else if(location.pathname === '/nfts')
+    else if(location.pathname === nftPage)
         return "NFTS";
-    else if(location.pathname === '/merchs')
+    else if(location.pathname === merchPage)
         return "Merchs";
-    else if(location.pathname === '/others')
+    else if(location.pathname === otherPage)
         return "Others";
     else return "Unknown";
     },[location.pathname]);
     const shownMarketProducts = useMemo(() =>{
-        if(location.pathname === "/market-place")
+        if(location.pathname === wlSpotsPage)
             return wlSpots;
-        else if(location.pathname === '/nfts')
+        else if(location.pathname === nftPage)
             return nfts;
-        else if(location.pathname === '/merchs')
+        else if(location.pathname === merchPage)
             return merchs;
-        else if(location.pathname === '/others')
+        else if(location.pathname === otherPage)
             return others;
         else return [];
     }, [location.pathname, wlSpots, merchs, others, nfts])

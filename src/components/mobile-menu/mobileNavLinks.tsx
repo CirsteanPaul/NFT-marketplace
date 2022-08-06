@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { dashboardPage, mainPage, merchPage, nftPage, otherPage, transactionPage, wlSpotsPage } from "../../constants/routing";
 import { ConnectButton } from "../../modules/top-menu/styles";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { disconnectBlockchainInfo, fecthBlockchainInfoAsyncAction } from "../../store/actions/blockchain-actions";
@@ -74,19 +75,19 @@ export function MobileNavLinks(props: any) {
       {isOpen && (
         <LinksWrapper>
         <LinkItem>
-          <Link to="/"><ItemLink>Home</ItemLink></Link>
+          <Link to={mainPage}><ItemLink>Home</ItemLink></Link>
           </LinkItem>
           <LinkItem>
-          <Link to="/market-place"><ItemLink>WL Spots</ItemLink></Link>
+          <Link to={wlSpotsPage}><ItemLink>WL Spots</ItemLink></Link>
           </LinkItem>
           <LinkItem>
-            <Link to="/merchs"><ItemLink>Merch</ItemLink></Link>
+            <Link to={merchPage}><ItemLink>Merch</ItemLink></Link>
             </LinkItem>
             <LinkItem>
-            <Link to="/nfts"><ItemLink>NFTs</ItemLink></Link>
+            <Link to={nftPage}><ItemLink>NFTs</ItemLink></Link>
             </LinkItem>
             <LinkItem>
-            <Link to="/others"><ItemLink>Others</ItemLink></Link>
+            <Link to={otherPage}><ItemLink>Others</ItemLink></Link>
             </LinkItem>
           <LinkItem>
             <ItemLink onClick={() =>window.open("http://rockstarapes.io", "_self")}>Website</ItemLink>
@@ -96,10 +97,10 @@ export function MobileNavLinks(props: any) {
           </LinkItem>
 
           <LinkItem>
-            {isAdmin && <Link to="/dashboard"><ItemLink>Dashboard</ItemLink></Link>}
+            {isAdmin && <Link to={dashboardPage}><ItemLink>Dashboard</ItemLink></Link>}
           </LinkItem>
           <LinkItem>
-          {isAdmin &&<Link to="/transactions"><ItemLink>Transactions</ItemLink></Link>}
+          {isAdmin &&<Link to={transactionPage}><ItemLink>Transactions</ItemLink></Link>}
           </LinkItem>
           <LinkItem>
           {`Balance: ${balance} tokens`}
