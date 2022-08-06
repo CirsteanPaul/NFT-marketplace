@@ -40,6 +40,7 @@ export const EarnInfo = styled.p`
         font-size: 20px;
         width: 80%;
         text-align: center;
+        align-self:center;
     }
 `;
 
