@@ -2,10 +2,11 @@ import { useEffect, useMemo } from 'react';
 import Swal from 'sweetalert2';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { setBlockchainTransactionStatus, spendTokensAsyncAction } from '../../store/actions/blockchain-actions';
-import { deleteMarketProductActionAsync, setMarketProductsShowModalAction, setMerketProductSelectedItemAction } from '../../store/actions/market-products-actions';
+import { deleteMarketProductActionAsync, setMarketProductsShowModalAction, setMerketProductSelectedItemAction, updateBidItemActionAsync } from '../../store/actions/market-products-actions';
 import { postNewTransactionActionAsync } from '../../store/actions/transaction-actions';
 import { blockchainAccountSelector, blockchainTransactionStatusSelector } from '../../store/selectors/blockchain-selectors';
 import { contractInfoIsAdminSelector } from '../../store/selectors/contract-info-selectors';
+import { marketPlaceHowMuchSelector, marketPlaceSelectedItemSelector } from '../../store/selectors/market-products-selectors';
 import IMarketProduct from '../../types/IMarketProduct';
 import { ButtonsSection, BuyButton, DeleteButton, LateItemData, LatestItemImage, LatestItemName, LatestItemPrice, LatestItemSectionContainer, LatestItemTokenPrice } from './styles'
 type Props = {
@@ -17,10 +18,29 @@ const BidItem = (props: Props) => {
     const isAdmin = useAppSelector(contractInfoIsAdminSelector);
     const accountAddress= useAppSelector(blockchainAccountSelector);
     const transactionStatus = useAppSelector(blockchainTransactionStatusSelector);
+    const howMuch = useAppSelector(marketPlaceHowMuchSelector);
+    const selectedItem = useAppSelector(marketPlaceSelectedItemSelector);
     const date = useMemo(() => deadline ? new Date(deadline) : new Date(Date.now()), [deadline]);
     const nowDate = new Date(Date.now());
     const handleDeleteClick = () => {
-        dispatch(deleteMarketProductActionAsync(id));
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                dispatch(deleteMarketProductActionAsync(id));
+              Swal.fire(
+                'Deleted!',
+                'Your product has been deleted.',
+                'success'
+              )
+            }
+          })
     }
     const handleBuyClick = () =>{
         if(!accountAddress){
@@ -35,19 +55,20 @@ const BidItem = (props: Props) => {
         dispatch(setMarketProductsShowModalAction(true));
     }
     useEffect(() =>{
-        if(transactionStatus === 1){
+        if(transactionStatus === 1 && selectedItem?.id === props.product.id){
         const sendTransaction = async() =>{
 
-        
+        await dispatch(updateBidItemActionAsync({accountAddress, howMuch, id}))
         await dispatch(postNewTransactionActionAsync({
             address: accountAddress,
             amount: price,
             name,
-            howMuch: 3,
+            howMuch: howMuch,
             createdAt: new Date(Date.now()),
         }));
     }
         sendTransaction()
+        dispatch(setMerketProductSelectedItemAction(null));
         dispatch(setBlockchainTransactionStatus(0));
     }
     },[transactionStatus]);
@@ -64,7 +85,7 @@ const BidItem = (props: Props) => {
             {date > nowDate ? <LatestItemTokenPrice>{`Untill ${date.toDateString()}`}</LatestItemTokenPrice> : <LatestItemTokenPrice>{`Winner ${address?.substring(0,15)}`}</LatestItemTokenPrice>}
             <ButtonsSection>
             {isAdmin && <DeleteButton onClick={handleDeleteClick}>Delete</DeleteButton>}
-            <BuyButton onClick ={handleBuyClick}>Bid</BuyButton>
+            {date > nowDate ? <BuyButton onClick ={handleBuyClick}>Bid</BuyButton> : <BuyButton disabled>Ended</BuyButton>}
             </ButtonsSection>
         </LateItemData>
         </div>

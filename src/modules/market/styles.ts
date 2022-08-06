@@ -20,7 +20,7 @@ export const PageTitle = styled.h3`
     }
 `;
 export const MarketPlaceContainer = styled.div`
-    width: 100vw;
+    width: 100%;
     display: grid;
     padding: 30px;
     margin-top: 50px;

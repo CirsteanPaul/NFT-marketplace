@@ -17,3 +17,6 @@ input[type=file]::file-selector-button {
     font-size: 17px;
     text-transform: uppercase;
 }
+.popup{
+    z-index: 10000000000000;
+}

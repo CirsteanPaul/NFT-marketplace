@@ -6,6 +6,7 @@ import BuyingModal from '../../components/buying-modal'
 import SellingItem from '../../components/selling-item'
 import Layout from '../../layout'
 import { useAppDispatch, useAppSelector } from '../../store'
+import { setBlockchainTransactionStatus } from '../../store/actions/blockchain-actions'
 import { fetchMarketProducts } from '../../store/actions/market-products-actions'
 import { blockchainTransactionLoadingSelector, blockchainTransactionStatusSelector } from '../../store/selectors/blockchain-selectors'
 import {  marketPlaceLoadingSelector, marketPlaceMerchItemsSelector, marketPlaceNFTItemsSelector, marketPlaceOthersItemsSelector, marketPlaceSortedByDateItemsSelector, marketPlaceWlSpotsItemsSelector } from '../../store/selectors/market-products-selectors'
@@ -78,6 +79,7 @@ const MarketPlace = () => {
                 text: 'Something went wrong!',
                 });
         }
+        dispatch(setBlockchainTransactionStatus(0));
     },[transactionStatus]);
     if(marketPlaceLoading)
         return <Layout></Layout>

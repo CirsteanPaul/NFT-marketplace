@@ -9,6 +9,7 @@ export const marketPlaceItemsSelector = (state: RootState) => marketProdcutsSele
 export const marketPlaceLatestItemSelector = (state: RootState) => state.marketProducts.latestItem;
 export const marketPlaceSelectedItemSelector = (state: RootState) => state.marketProducts.selectedItem;
 export const marketPlaceShowBuyingModalSelector = (state: RootState) => state.marketProducts.showModal;
+export const marketPlaceHowMuchSelector = (state: RootState) => state.marketProducts.howMuch;
 
 export const marketPlaceSortedByDateItemsSelector = (state: RootState) =>{
     const transactions = marketPlaceItemsSelector(state);

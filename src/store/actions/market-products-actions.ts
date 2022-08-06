@@ -4,18 +4,20 @@ import Swal from "sweetalert2";
 import { v4 } from "uuid";
 import { storage } from "../../api";
 import { addLastetCollection, deleteLatestItem, getLatestItem } from "../../api/latest-item-requests";
-import { deleteMarketProductRequest, getMarketProductsHistory as getMarketProducts, postNewCollection  } from "../../api/market-products-requests";
+import { deleteMarketProductRequest, getMarketProductsHistory as getMarketProducts, postNewCollection, updateBidItemRequest, updateSellingItemRequest  } from "../../api/market-products-requests";
 import { mapAddNewCollection, mapMarketProducts } from "../../mappers/market-products-mappers";
 import IMarketProduct from "../../types/IMarketProduct";
 import IAddNewCollectionRequest from "../../types/requests/IAddNewCollectionRequest";
+import IUpdateBidItemRequest from "../../types/requests/IUpdateBidItemRequest";
 import checkInputData from "../../utils/checkInputData";
-import {  MARKET_PRODUCTS__SET_LOADING, MARKET_PRODUCTS__SET, MARKET_PRODUCTS__SET_SELECTED, MARKET_PRODUCTS__SET_SHOW_MODAL, MARKET_PRODUCTS__FETCH, MARKET_PLACE__GET_LATEST_ITEM, MARKET_PRODUCTS__SET_LATEST_ITEM, MARKET_PRODUCTS__DELETE, MARKET_PRODUCTS__ADD_NEW_COLLECTION } from "../constants";
+import {  MARKET_PRODUCTS__SET_LOADING, MARKET_PRODUCTS__SET, MARKET_PRODUCTS__UPDATE_BID_ITEM, MARKET_PRODUCTS__SET_SELECTED, MARKET_PRODUCTS__SET_SHOW_MODAL, MARKET_PRODUCTS__FETCH, MARKET_PLACE__GET_LATEST_ITEM, MARKET_PRODUCTS__SET_LATEST_ITEM, MARKET_PRODUCTS__DELETE, MARKET_PRODUCTS__ADD_NEW_COLLECTION, MARKET_PLACE__SET_HOW_MUCH } from "../constants";
 
 export const setMarketProductsLoading = createAction<boolean>(MARKET_PRODUCTS__SET_LOADING);
 export const setMarketProducts = createAction<IMarketProduct[]>(MARKET_PRODUCTS__SET);
 export const setMarketProductLatestItem = createAction<IMarketProduct>(MARKET_PRODUCTS__SET_LATEST_ITEM);
 export const setMerketProductSelectedItemAction = createAction<IMarketProduct | null>(MARKET_PRODUCTS__SET_SELECTED);
 export const setMarketProductsShowModalAction = createAction<boolean>(MARKET_PRODUCTS__SET_SHOW_MODAL);
+export const setMarketProductHowMuchAction = createAction<number>(MARKET_PLACE__SET_HOW_MUCH);
 
 export const getLatestItemAsyncAction = createAsyncThunk(MARKET_PLACE__GET_LATEST_ITEM, async(__: never, thunkApi) =>{
     thunkApi.dispatch(setMarketProductsLoading(true));
@@ -75,7 +77,7 @@ export const addNewCollectionActionAsync = createAsyncThunk(MARKET_PRODUCTS__ADD
             
         console.log(imageLink)
         const realData = mapAddNewCollection(data);
-        if(realData.type === 1){
+        if(realData.category === 1){
             const request = {
                 name: realData.name,
                 amount: realData.amount,
@@ -123,5 +125,31 @@ export const addNewCollectionActionAsync = createAsyncThunk(MARKET_PRODUCTS__ADD
     }
     finally{
         thunkApi.dispatch(setMarketProductsLoading(false));
+    }
+});
+export const updateBidItemActionAsync = createAsyncThunk(MARKET_PRODUCTS__UPDATE_BID_ITEM, async(data: IUpdateBidItemRequest, thunkApi) =>{
+    thunkApi.dispatch(setMarketProductsLoading(true))
+    try{
+        await updateBidItemRequest(data);
+        thunkApi.dispatch(fetchMarketProducts());
+    } 
+    catch{
+        // swallow exception
+    }
+    finally {
+    thunkApi.dispatch(setMarketProductsLoading(false))
+    }
+});
+export const updateSellingItemActionAsync = createAsyncThunk(MARKET_PRODUCTS__UPDATE_BID_ITEM, async(data: IUpdateBidItemRequest, thunkApi) =>{
+    thunkApi.dispatch(setMarketProductsLoading(true))
+    try{
+        await updateSellingItemRequest(data);
+        thunkApi.dispatch(fetchMarketProducts());
+    } 
+    catch{
+        // swallow exception
+    }
+    finally {
+    thunkApi.dispatch(setMarketProductsLoading(false))
     }
 });

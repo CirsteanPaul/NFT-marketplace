@@ -17,7 +17,7 @@ export const fecthContractInfo = createAsyncThunk(CONTRACT_INFO__FETCH, async(__
         {
             const balance = await contract.balanceOf(account);
             const owner = await contract.owner();
-            const trueBalance = balance.toNumber();
+            const trueBalance =120;// balance.toNumber();
             thunkApi.dispatch(setContractInfoBalance(trueBalance));
             thunkApi.dispatch(setContractInfoOwner(owner));
         }
