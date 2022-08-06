@@ -40,7 +40,6 @@ export const EarnInfo = styled.p`
         font-size: 20px;
         width: 80%;
         text-align: center;
-        align-self: center;
     }
 `;
 
@@ -49,6 +48,7 @@ export const InformationTitle = styled.h3`
     color: white;
     width: 100%;
     letter-spacing: 1.7px;
+    align-self: center;
     @media screen and (max-width: 982px){
         font-size: 40px;
         width: 80%;
