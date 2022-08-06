@@ -11,8 +11,8 @@ export const NavBarContainer = styled.div`
     justify-content:space-between;
     align-items:center;
     border-color: transparent;
-    background: linear-gradient(180deg, #F267EB 0%, rgba(127, 76, 239, 0) 100%);
-    background-color: rgba(1, 32, 76, 1);
+    background: linear-gradient(180deg, #F267EB 0%, rgba(52, 48, 133, 1) 70%,rgba(127, 76, 239, 0) 100%);
+    background-color: rgba(52, 48, 133, 1);
 `;
 export const MenuContainer = styled.div`
     display:flex;
@@ -39,13 +39,13 @@ export const MenuItemsContainer = styled.div`
     align-items: center;
     flex-direction: column;
 `;
-export const MenuItem = styled.button`
+export const MenuItem = styled.button<{active: boolean}>`
     font-size: 16px;
     outline: 0;
     border: 0;
     font-family: Inter;
     background: transparent;
-    color: white;
+    color: ${props => props.active ? "#2CA0E2" : "white"};
     text-align: center;
     &:hover{
         cursor: pointer;

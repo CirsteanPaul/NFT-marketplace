@@ -3,16 +3,35 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import Swal from "sweetalert2";
 import { v4 } from "uuid";
 import { storage } from "../../api";
-import { deleteMarketProductRequest, getMarketProductsHistory as getMarketProducts, postNewCollection } from "../../api/market-products-requests";
+import { addLastetCollection, deleteLatestItem, getLatestItem } from "../../api/latest-item-requests";
+import { deleteMarketProductRequest, getMarketProductsHistory as getMarketProducts, postNewCollection  } from "../../api/market-products-requests";
 import { mapAddNewCollection, mapMarketProducts } from "../../mappers/market-products-mappers";
 import IMarketProduct from "../../types/IMarketProduct";
 import IAddNewCollectionRequest from "../../types/requests/IAddNewCollectionRequest";
 import checkInputData from "../../utils/checkInputData";
-import {  MARKET_PRODUCTS__SET_LOADING, MARKET_PRODUCTS__SET, MARKET_PRODUCTS__FETCH, MARKET_PRODUCTS__DELETE, MARKET_PRODUCTS__ADD_NEW_COLLECTION } from "../constants";
+import {  MARKET_PRODUCTS__SET_LOADING, MARKET_PRODUCTS__SET, MARKET_PRODUCTS__SET_SELECTED, MARKET_PRODUCTS__SET_SHOW_MODAL, MARKET_PRODUCTS__FETCH, MARKET_PLACE__GET_LATEST_ITEM, MARKET_PRODUCTS__SET_LATEST_ITEM, MARKET_PRODUCTS__DELETE, MARKET_PRODUCTS__ADD_NEW_COLLECTION } from "../constants";
 
 export const setMarketProductsLoading = createAction<boolean>(MARKET_PRODUCTS__SET_LOADING);
 export const setMarketProducts = createAction<IMarketProduct[]>(MARKET_PRODUCTS__SET);
+export const setMarketProductLatestItem = createAction<IMarketProduct>(MARKET_PRODUCTS__SET_LATEST_ITEM);
+export const setMerketProductSelectedItemAction = createAction<IMarketProduct | null>(MARKET_PRODUCTS__SET_SELECTED);
+export const setMarketProductsShowModalAction = createAction<boolean>(MARKET_PRODUCTS__SET_SHOW_MODAL);
 
+export const getLatestItemAsyncAction = createAsyncThunk(MARKET_PLACE__GET_LATEST_ITEM, async(__: never, thunkApi) =>{
+    thunkApi.dispatch(setMarketProductsLoading(true));
+    try {
+        const response = await getLatestItem();
+        const latestItems = mapMarketProducts(response);
+        if( latestItems.length){
+            thunkApi.dispatch(setMarketProductLatestItem(latestItems[0]));
+        }
+    } catch {
+        // swallow exception
+    }
+    finally {
+        thunkApi.dispatch(setMarketProductsLoading(false));
+    }
+});
 export const fetchMarketProducts = createAsyncThunk(MARKET_PRODUCTS__FETCH, async(__: never, thunkApi) => {
     thunkApi.dispatch(setMarketProductsLoading(true))
     try {
@@ -67,6 +86,10 @@ export const addNewCollectionActionAsync = createAsyncThunk(MARKET_PRODUCTS__ADD
                 type: realData.type,
             }
             await postNewCollection(request);
+            const latestItem = await getLatestItem();
+            console.log(latestItem)
+            await deleteLatestItem(latestItem[0]);
+            await addLastetCollection(request);
         }
         else{
             const request = {
@@ -80,12 +103,17 @@ export const addNewCollectionActionAsync = createAsyncThunk(MARKET_PRODUCTS__ADD
                 type: realData.type,
             }
             await postNewCollection(request);
+            const latestItem = await getLatestItem();
+            console.log(latestItem)
+            await deleteLatestItem(latestItem[0]);
+            await addLastetCollection(request);
         }
         Swal.fire({
             icon: 'success',
             title: 'Item was addded!',
             });
-    } catch{
+    } catch(e){
+        console.log(e);
         Swal.fire({
             icon: 'error',
             title: 'Oops...',

@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { setBlockchainTransactionStatus, spendTokensAsyncAction } from '../../store/actions/blockchain-actions';
-import { deleteMarketProductActionAsync } from '../../store/actions/market-products-actions';
+import { deleteMarketProductActionAsync, setMarketProducts, setMarketProductsShowModalAction, setMerketProductSelectedItemAction } from '../../store/actions/market-products-actions';
 import { postNewTransactionActionAsync } from '../../store/actions/transaction-actions';
 import { blockchainAccountSelector, blockchainTransactionStatusSelector } from '../../store/selectors/blockchain-selectors';
 import { contractInfoIsAdminSelector } from '../../store/selectors/contract-info-selectors';
@@ -18,6 +19,18 @@ const SellingItem = (props: Props) => {
     const transactionStatus = useAppSelector(blockchainTransactionStatusSelector);
     const handleDeleteClick = () => {
         dispatch(deleteMarketProductActionAsync(id));
+    }
+    const handleBuyClick = () =>{
+        if(!accountAddress){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please connect with your wallet!',
+                });
+            return;
+        }
+        dispatch(setMerketProductSelectedItemAction(props.product));
+        dispatch(setMarketProductsShowModalAction(true));
     }
     useEffect(() =>{
         if(transactionStatus === 1){
@@ -42,11 +55,11 @@ const SellingItem = (props: Props) => {
         <LatestItemImage src = {photo}></LatestItemImage>
         <LateItemData>
             <LatestItemName>{name}</LatestItemName>
-            <LatestItemPrice>{`${amount} left`}</LatestItemPrice>
-            <LatestItemTokenPrice>{`${price} tokens`}</LatestItemTokenPrice>
+            <LatestItemPrice>{`supply: ${amount}`}</LatestItemPrice>
+            <LatestItemTokenPrice>{`price: ${price} tokens`}</LatestItemTokenPrice>
             <ButtonsSection>
             {isAdmin && <DeleteButton onClick={handleDeleteClick}>Delete</DeleteButton>}
-            <BuyButton onClick ={ () => dispatch(spendTokensAsyncAction(price))}>Buy</BuyButton>
+            <BuyButton onClick ={handleBuyClick}>Buy</BuyButton>
             </ButtonsSection>
         </LateItemData>
         </div>

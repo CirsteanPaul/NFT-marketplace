@@ -12,12 +12,13 @@ export const mapProduct = (marketProduct : IMarketProductResponse): IMarketProdu
     id: toString(marketProduct?.id),
     name: toString(marketProduct?.name),
     amount: toNumber(marketProduct?.amount),
-    createdAt: toNumber(marketProduct?.createdAt.seconds * 1000),
+    createdAt: toNumber(marketProduct?.createdAt.seconds * 100),
     photo: toString(marketProduct?.photo),
     price: toNumber(marketProduct?.price),
-    deadline: toString(marketProduct?.deadline),
+    deadline: toNumber(marketProduct?.deadline  ? marketProduct?.deadline?.seconds * 1000 : 0) ,
     address: toString(marketProduct?.address),
     type: toNumber(marketProduct?.type),
+    category: toNumber(marketProduct?.category),
 });
 export const mapAddNewCollection = (collection : IAddNewCollectionRequest): IAddNewCollection => ({
     name: toString(collection?.name),

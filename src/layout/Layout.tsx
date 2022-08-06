@@ -19,9 +19,13 @@ const Layout = ({children, scrollable}: any): JSX.Element  => {
         {width > 1000 && <NavBar /> }
         <MainContentContainer scrollable={scrollable}>
             {width > 1000 ? <TopMenu /> : <MobileHeader />}
-            <ShadowColorBottomRight />
+            {width > 800 ? <>
+                <ShadowColorBottomRight />
             <ShadowColorBottomLeft />
             <ShadowColorTopLeft />
+            </> : <ShadowColorTopLeft />
+                
+            }
              {children}
         </MainContentContainer>
     </LayoutContainer>

@@ -9,5 +9,5 @@ export const transactionItemsSelector = (state: RootState) => transactionSelecto
 
 export const transactionSortedByDateItemsSelector = (state: RootState) =>{
     const transactions = transactionItemsSelector(state);
-    return [...transactions].sort((a,b) => a.createdAt - b.createdAt);
+    return [...transactions].sort((a,b) => b.createdAt - a.createdAt);
 }

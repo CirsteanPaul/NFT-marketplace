@@ -20,7 +20,7 @@ export const LatestItemTitle = styled.p`
     color:white;
     opacity: .7;
     font-family: Alef;
-    font-size: 40px;
+    font-size: 20px;
 `;
 export const LatestItemImage = styled.img`
     object-fit: cover;
@@ -44,9 +44,9 @@ flex-direction: column;
 justify-content: flex-end;
 gap: 20px;
 width: 330px;
-height: 300px;
+height: 240px;
 left: -14px;
-top: 70%;
+top: 80%;
 border-radius: 5px;
 padding: 10px;
 padding-left: 10px;
@@ -54,20 +54,18 @@ padding-bottom: 20px;
 box-shadow: 1.5px 1px  0 0 rgba(0,0,0,.4);
 border: 1px solid rgba( 255,255,255, .3);
 background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) -1.52%, rgba(255, 255, 255, 0.024) 104.35%);
-clip-path: polygon(0 0, 22% 0, 100% 0, 100% 74%, 66% 100%, 0 100%);
-
--webkit-clip-path: polygon(0 0, 22% 0, 100% 0, 100% 74%, 66% 100%, 0 100%);
 /* backdrop-filter: blur(120px); */
 @media screen and (max-width:520px){
-        width: 230px;
+        width: 290px;
         height: 230px;
         gap: 10px;
         top: 60%;
+        left: -7%
     }
 `;
 export const LatestItemName = styled.p`
     font-family: Alef;
-    font-size:30px;
+    font-size:20px;
     color: white;
     font-weight: 700;
     @media screen and (max-width:520px){
@@ -76,14 +74,14 @@ export const LatestItemName = styled.p`
 `;
 export const LatestItemPrice = styled.p`
     color: white;
-    font-size: 20px;
+    font-size: 13px;
     @media screen and (max-width:520px){
         font-size: 15px;
     }
 `;
 export const LatestItemTokenPrice = styled.p`
     color: white;
-    font-size: 30px;
+    font-size: 13px;
     @media screen and (max-width:520px){
         font-size: 15px;
     }
@@ -91,7 +89,7 @@ export const LatestItemTokenPrice = styled.p`
 export const DeleteButton = styled.button`
     outline: 0;
     border: 0;
-    padding: 10px 20px;
+    padding: 10px 30px;
     background-color: #984D4D;
     color: white;
 
@@ -135,7 +133,6 @@ export const BuyButton = styled.button`
 export const ButtonsSection = styled.div`
     display: flex;
     justify-content: center;
-    padding-right: 20%;
     gap: 10px;
     
 `;

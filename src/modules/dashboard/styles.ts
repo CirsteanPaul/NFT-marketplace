@@ -6,6 +6,7 @@ export const AddNewCollectionContainer = styled.form`
     flex-direction: column;
     justify-content: center;
     margin-top: 100px;
+    z-index: 10;
     gap: 30px;
 `;
 export const MainPartContainer = styled.div`
@@ -24,6 +25,7 @@ export const InputForm = styled.div`
     gap: 20px;
     align-items: center;
     justify-content: center;
+    z-index: 100;
 `;
 export const LogImage = styled.img`
     height: 300px;
@@ -33,60 +35,69 @@ export const LogImage = styled.img`
     object-fit: cover;
 `;
 export const InputLine = styled.input`
-    font-size: 15px;
-    width: 453px;
-    height: 47px;
-    opacity: .8;
+     display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 20px;
+    width: 70%;
+    min-height: 40px;
+    align-self: center;
+    padding: 10px;
     border: 2px solid #43597A;
-    background-color: #1A365E;
-    background: linear-gradient(90deg, rgba(26, 54, 94, 0.6) -3.84%, rgba(26, 54, 94, 0.5) 133.08%);
-    backdrop-filter: blur(60px);
-    outline: 0;
-    border-radius: 5px;
     color: #08D9F2;
-    padding: 0 10px;
-    clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
-    -webkit-clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
+    border-radius:  10px;
+    z-index: 100;
+    background: linear-gradient(90deg, rgba(26, 54, 94, 0.6) -3.84%, rgba(26, 54, 94, 0.5) 133.08%);
+    align-items:center;
+    @media screen and (max-width: 850px){
+        width: 100%;
+    }
     ::placeholder{
         color: #08D9F2;
     }
     @media screen and (max-width: 700px){
         width: 80%;
     }
+    :focus{
+        outline: 0;
+    }
 
 `;
 export const InputLineWrapper = styled.div`
-    width: 473px;
+    width: 100%;
     font-size: 15px;
    
     display:flex;
     justify-content: flex-start;
+    flex-direction: column;
+    gap: 20px;
     align-items:center;
     font-size: 15px;
     outline: 0;
     border: 0;
     border-radius: 5px;
     padding: 0 10px;
-    clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
-    -webkit-clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
-    color:darkblue;
-    @media screen and (max-width: 700px){
+   @media screen and (max-width: 700px){
         width: 80%;
     }
 
 `;
 export const SelectionLine = styled.div`
-    border-radius: 10px;
-    padding: 4px 10px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    display: block;
+     display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    width: 70%;
+    min-height: 40px;
+    align-self: center;
+    padding: 10px;
     border: 2px solid #43597A;
-    background: linear-gradient(90deg, rgba(26, 54, 94, 0.6) -3.84%, rgba(26, 54, 94, 0.5) 133.08%);
     color: #08D9F2;
-    clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
-    -webkit-clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
+    border-radius:  10px;
+    background: linear-gradient(90deg, rgba(26, 54, 94, 0.6) -3.84%, rgba(26, 54, 94, 0.5) 133.08%);
+    align-items:center;
+    @media screen and (max-width: 850px){
+        width: 100%;
+    }
     
 `;
 export const SelectForm = styled.select`
@@ -100,9 +111,12 @@ export const SelectForm = styled.select`
     color: #08D9F2;
 `;
 export const PhotoInput = styled.input`
-    margin-left: 10px;
+    margin-left: 100px;
     outline: 0;
-    padding: 5px;
+    align-self: center;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
     background-color: transparent;
     border-radius: 10px;
     border: 0;
@@ -111,12 +125,14 @@ export const PhotoInput = styled.input`
 export const ListingButtonContainter = styled.div`
     display:flex;
     margin-top: 50px;
+    z-index: 50;
     justify-content: center;
 `;
 export const ListingButton = styled.input`
     height: 70px;
     width: 250px;
     border-radius: 10px;
+    z-index: 50;
     background-color:#2CA0E2;
     color: white;
     clip-path: polygon(0 19%, 22% 1%, 100% 0, 100% 79%, 75% 100%, 0 100%);
@@ -127,5 +143,9 @@ export const ListingButton = styled.input`
     font-size: 17px;
     &:hover{
         cursor: pointer;
+    }
+    @media screen and (max-width:700px){
+        width:180px;
+        height: 50px
     }
 `;

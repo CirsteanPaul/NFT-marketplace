@@ -8,6 +8,7 @@ interface IMarketProductResponse {
     price: number,
     createdAt: firebaseTimestamp,
     deadline?: firebaseTimestamp,
+    category: number,
     type: number,
     address?: string,
 }

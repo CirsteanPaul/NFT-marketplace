@@ -1,13 +1,15 @@
 import { useEffect, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import BidItem from '../../components/bid-item'
+import BuyingModal from '../../components/buying-modal'
 import SellingItem from '../../components/selling-item'
 import Layout from '../../layout'
 import { useAppDispatch, useAppSelector } from '../../store'
 import { fetchMarketProducts } from '../../store/actions/market-products-actions'
 import { blockchainTransactionLoadingSelector, blockchainTransactionStatusSelector } from '../../store/selectors/blockchain-selectors'
 import {  marketPlaceLoadingSelector, marketPlaceMerchItemsSelector, marketPlaceNFTItemsSelector, marketPlaceOthersItemsSelector, marketPlaceSortedByDateItemsSelector, marketPlaceWlSpotsItemsSelector } from '../../store/selectors/market-products-selectors'
-import { MainSection, MarketPlaceContainer } from './styles'
+import { MainSection, MarketPlaceContainer, PageTitle } from './styles'
 
 const MarketPlace = () => {
     const location = useLocation();
@@ -23,6 +25,17 @@ const MarketPlace = () => {
         dispatch(fetchMarketProducts());
 
     },[dispatch]);
+    const titleMarket = useMemo(() =>{
+        if(location.pathname === "/market-place")
+        return 'WL spots';
+    else if(location.pathname === '/nfts')
+        return "NFTS";
+    else if(location.pathname === '/merchs')
+        return "Merchs";
+    else if(location.pathname === '/others')
+        return "Others";
+    else return "Unknown";
+    },[location.pathname]);
     const shownMarketProducts = useMemo(() =>{
         if(location.pathname === "/market-place")
             return wlSpots;
@@ -71,8 +84,11 @@ const MarketPlace = () => {
   return (
     <Layout scrollable>
         <MainSection>
+        <BuyingModal />
+            <PageTitle>{titleMarket}</PageTitle>
         <MarketPlaceContainer>
-        {shownMarketProducts.map( product => <SellingItem key={product.id} product={product}/>)}
+        {shownMarketProducts.map( product => product.category === 1 ?<SellingItem key={product.id} product={product}/>
+        : <BidItem key={product.id} product={product}></BidItem>)}
 
         </MarketPlaceContainer>
         </MainSection>

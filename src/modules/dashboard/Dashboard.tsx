@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../layout'
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,9 +14,18 @@ const Dashboard = () => {
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState(categories[0]);
     const [amount, setAmount] = useState('');
+    const [imageUrl, setImageUrl] = useState<any>('');
     const [imageToUpload, setImageToUpload] = useState<File | null>(null);
     const [type, setType] = useState(types[0]);
     const [startDate, setStartDate] = useState(new Date());
+    useEffect(() =>{
+        if(!imageToUpload) return;
+        const reader = new FileReader();
+        const url = reader.readAsDataURL(imageToUpload);
+        reader.onloadend = function (e) {
+            setImageUrl([reader.result])
+          }
+    },[imageToUpload])
     const handleSubmit = async (e : any) =>{
         e.preventDefault();
         dispatch(addNewCollectionActionAsync({name, price, category, amount, type, imageToUpload, startDate}));
@@ -49,14 +58,10 @@ const Dashboard = () => {
           </SelectForm>
           </SelectionLine>
           </InputLineWrapper>
-      {category === '2' && <div style={{ alignSelf: 'center'}}><DatePicker minDate={new Date(Date.now())} selected={startDate} onChange={(date:Date) => setStartDate(date)} /> </div>}
-   
-          <InputLineWrapper>
-        <label >Photo:</label>
+      {category === '2' && <div style={{ alignSelf: 'center', zIndex: 1000}}><DatePicker minDate={new Date(Date.now())} selected={startDate} onChange={(date:Date) => setStartDate(date)} /> </div>}
         <PhotoInput type="file" onChange={(e) => setImageToUpload(e.target?.files?.length ? e.target.files[0] : null)} />
-        </InputLineWrapper>
             </InputForm>
-                <LogImage src = 'assets/placeholder.png' />
+             {imageUrl !== '' ? <LogImage src = {imageUrl} /> : <LogImage src = 'assets/placeholder.png' />}
 
             </MainPartContainer>
             <ListingButtonContainter>

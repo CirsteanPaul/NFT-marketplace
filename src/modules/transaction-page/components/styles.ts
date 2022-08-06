@@ -14,7 +14,7 @@ export const TransactionContainer = styled.div`
     border-radius:  10px;
     background: linear-gradient(90deg, rgba(26, 54, 94, 0.6) -3.84%, rgba(26, 54, 94, 0.5) 133.08%);
     align-items:center;
-    @media screen and (max-width: 700px){
+    @media screen and (max-width: 850px){
         width: 100%;
     }
 `;

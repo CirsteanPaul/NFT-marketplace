@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../../layout'
+import { useAppDispatch } from '../../store';
+import { getLatestItemAsyncAction } from '../../store/actions/market-products-actions';
 import LatestItem from './components';
 import { EarnInfo, ExploreMoreButton, HomeContainer, InfoButtonsSection, InformationSectionContainer, InformationTitle, JoinDiscordButton  } from './styles';
 
 const Home = () => {
     const navigate = useNavigate()
+    const dispatch = useAppDispatch();
+    useEffect(() =>{
+        dispatch(getLatestItemAsyncAction());
+    },[dispatch]);
   return (
     <Layout>
     <HomeContainer>

@@ -14,8 +14,8 @@ const TopMenu = () => {
         return (
             <TopMenuContainer>
             <LeftSide>
-                <RedirectButton onClick={() => window.open("https://google.com", "_self")}>Website</RedirectButton>
-                <RedirectButton onClick={() => window.open("https://google.com", "_self")}>Staking</RedirectButton>
+                <RedirectButton onClick={() => window.open("http://rockstarapes.io", "_self")}>Website</RedirectButton>
+                <RedirectButton onClick={() => window.open("https://staking.rockstarapes.io/", "_self")}>Staking</RedirectButton>
             </LeftSide>
             <RightSide>
                 <BalanceContainer>{`Balance: ${balance} tokens`}</BalanceContainer>
@@ -27,8 +27,8 @@ const TopMenu = () => {
   return (
     <TopMenuContainer>
         <LeftSide>
-            <RedirectButton onClick={() => window.open("https://google.com", "_self")}>Website</RedirectButton>
-            <RedirectButton onClick={() => window.open("https://google.com", "_self")}>Staking</RedirectButton>
+            <RedirectButton onClick={() => window.open("http://rockstarapes.io", "_self")}>Website</RedirectButton>
+            <RedirectButton onClick={() => window.open("https://staking.rockstarapes.io/", "_self")}>Staking</RedirectButton>
         </LeftSide>
         <RightSide>
             <ConnectButton onClick={() => dispatch(fecthBlockchainInfoAsyncAction())}>Connect</ConnectButton>

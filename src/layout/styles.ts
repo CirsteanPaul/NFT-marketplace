@@ -3,19 +3,15 @@ import styled from "styled-components";
 export const LayoutContainer = styled.div`
     display:flex;
     width: 100vw;
-
+    
     min-height: 100vh;
 `;
 export const MainContentContainer = styled.main<{scrollable: boolean}>`
     width: 100%;
     position: relative;
-    overflow: ${props => props.scrollable ? "scroll" : "hidden"};
-    overflow: scroll;
+    overflow: ${props => props.scrollable ? "scroll" : "hidden"}; 
     overflow-x: hidden;
     flex-direction: column;
-    @media screen and (max-width: 990px){
-        overflow-y: visible;
-    }
     background-color: rgba(1, 32, 76, 1);
 `;
 export const ShadowColorBottomRight = styled.div`
@@ -48,13 +44,16 @@ export const ShadowColorTopLeft = styled.div`
     position: absolute;
     width: 469.16px;
     height: 819.21px;
-    left: -10vw;
-    top: -75vh;
+    left: -10%;
+    top: -75%;
     background: #F268EA;
     overflow: hidden;
     border: 1px solid #000000;
     filter: blur(360px);
     transform: rotate(-38.84deg);
+    @media screen and (max-width:800px){
+        top: 20%;
+    }
 `;
 export const CircleBackground = styled.div`
     position: absolute;

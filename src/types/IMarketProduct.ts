@@ -5,7 +5,8 @@ interface IMarketProduct {
     photo: string,
     price: number,
     createdAt: number,
-    deadline?: string,
+    deadline?: number,
+    category: number,
     type: number,
     address?: string,
 }

@@ -6,10 +6,13 @@ const marketProdcutsSelectors = marketProductsAdapter.getSelectors(( state: Root
 
 export const marketPlaceLoadingSelector = (state: RootState) => state.marketProducts.loading;
 export const marketPlaceItemsSelector = (state: RootState) => marketProdcutsSelectors.selectAll(state);
+export const marketPlaceLatestItemSelector = (state: RootState) => state.marketProducts.latestItem;
+export const marketPlaceSelectedItemSelector = (state: RootState) => state.marketProducts.selectedItem;
+export const marketPlaceShowBuyingModalSelector = (state: RootState) => state.marketProducts.showModal;
 
 export const marketPlaceSortedByDateItemsSelector = (state: RootState) =>{
     const transactions = marketPlaceItemsSelector(state);
-    return [...transactions].sort((a, b) => a.createdAt - b.createdAt);
+    return [...transactions].sort((a, b) => b.createdAt - a.createdAt);
 }
 export const marketPlaceWlSpotsItemsSelector = (state: RootState) =>{
     const marketProducts=  marketPlaceSortedByDateItemsSelector(state);
@@ -17,11 +20,11 @@ export const marketPlaceWlSpotsItemsSelector = (state: RootState) =>{
 }
 export const marketPlaceNFTItemsSelector = (state: RootState) =>{
     const marketProducts=  marketPlaceSortedByDateItemsSelector(state);
-    return marketProducts.filter(wlSpot => wlSpot.type === 2);
+    return marketProducts.filter(wlSpot => wlSpot.type === 3);
 }
 export const marketPlaceMerchItemsSelector = (state: RootState) =>{
     const marketProducts=  marketPlaceSortedByDateItemsSelector(state);
-    return marketProducts.filter(wlSpot => wlSpot.type === 3);
+    return marketProducts.filter(wlSpot => wlSpot.type === 2);
 }
 export const marketPlaceOthersItemsSelector = (state: RootState) =>{
     const marketProducts=  marketPlaceSortedByDateItemsSelector(state);
