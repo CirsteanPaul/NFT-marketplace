@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { dashboardPage, mainPage, merchPage, nftPage, otherPage, transactionPage, wlSpotsPage } from "../constants/routing";
 import Dashboard from "../modules/dashboard";
 import Home from "../modules/home";
 import MarketPlace from "../modules/market";
@@ -9,14 +10,14 @@ const RootRouter = (): JSX.Element =>{
     return (
     <BrowserRouter>
         <Routes>
-            <Route index element={<Home />}></Route>
+            <Route path={mainPage} element={<Home />}></Route>
             
-            <Route path="market-place" element={<MarketPlace />} />
-            <Route path="nfts" element={<MarketPlace />} />
-            <Route path="merchs" element={<MarketPlace />} />
-            <Route path="others" element={<MarketPlace />} />
-            <Route path="dashboard" element={<AuthRoute><Dashboard /></AuthRoute>} />
-            <Route path="transactions" element={<AuthRoute><TransactionPage /></AuthRoute>} />
+            <Route path={wlSpotsPage} element={<MarketPlace />} />
+            <Route path={nftPage} element={<MarketPlace />} />
+            <Route path={merchPage} element={<MarketPlace />} />
+            <Route path={otherPage} element={<MarketPlace />} />
+            <Route path={dashboardPage} element={<AuthRoute><Dashboard /></AuthRoute>} />
+            <Route path={transactionPage} element={<AuthRoute><TransactionPage /></AuthRoute>} />
             <Route path="*" element={<div>NotFound</div>}></Route>
         </Routes>
     </BrowserRouter>
