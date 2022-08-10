@@ -15,8 +15,11 @@ export const mapProduct = (marketProduct : IMarketProductResponse): IMarketProdu
     createdAt: toNumber(marketProduct?.createdAt.seconds * 100),
     photo: toString(marketProduct?.photo),
     price: toNumber(marketProduct?.price),
+    discordName: toString(marketProduct?.discordName) || '',
     deadline: toNumber(marketProduct?.deadline  ? marketProduct?.deadline?.seconds * 1000 : 0) ,
     address: toString(marketProduct?.address),
+    discordLink: toString(marketProduct?.discordLink),
+    twitterLink: toString(marketProduct.twitterLink),
     type: toNumber(marketProduct?.type),
     category: toNumber(marketProduct?.category),
 });
@@ -26,6 +29,8 @@ export const mapAddNewCollection = (collection : IAddNewCollectionRequest): IAdd
     category: toNumber(collection?.category),
     amount: toNumber(collection?.amount),
     type: toNumber(collection?.type),
+    discordLink: toString(collection?.discordLink),
+    twitterLink: toString(collection.twitterLink),
     imageToUpload: collection?.imageToUpload,
     startDate: collection?.startDate
 });

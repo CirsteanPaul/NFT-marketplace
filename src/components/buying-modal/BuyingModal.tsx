@@ -3,9 +3,10 @@ import React, { useMemo, useState } from 'react'
 import { useEffect } from 'react';
 import Modal from 'react-modal';
 import Swal from 'sweetalert2';
+import { InputLine } from '../../modules/dashboard/styles';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { setBlockchainTransactionStatus, spendTokensAsyncAction } from '../../store/actions/blockchain-actions';
-import { setMarketProductHowMuchAction, setMarketProductsShowModalAction, setMerketProductSelectedItemAction } from '../../store/actions/market-products-actions';
+import { setMarketProductHowMuchAction, setMarketProductsDiscordNameAction, setMarketProductsShowModalAction, setMerketProductSelectedItemAction } from '../../store/actions/market-products-actions';
 import { blockchainAccountSelector } from '../../store/selectors/blockchain-selectors';
 import { contractInfoBalanceSelector } from '../../store/selectors/contract-info-selectors';
 import { marketPlaceSelectedItemSelector, marketPlaceShowBuyingModalSelector } from '../../store/selectors/market-products-selectors';
@@ -16,6 +17,7 @@ const BuyingModal = () => {
     const isOpen = useAppSelector(marketPlaceShowBuyingModalSelector);
     const dispatch = useAppDispatch();
     const [selectedAmount, setSelectedAmount] = useState(1);
+    const [discordName, setDiscordName] = useState('');
     const balance = useAppSelector(contractInfoBalanceSelector);
     const accountAddress= useAppSelector(blockchainAccountSelector);
     const selectedProduct = useAppSelector(marketPlaceSelectedItemSelector);
@@ -26,6 +28,16 @@ const BuyingModal = () => {
         dispatch(setMarketProductsShowModalAction(false));
     }
     const handleBuyClick = () =>{
+        if(type === 1 && discordName === '') {
+            { Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Please provide your discord name, for the wl spots",
+                customClass: { container: 'popup'}
+                });
+            return;
+           }
+        } 
         if(category === 2){
             if(selectedAmount < price)
            { Swal.fire({
@@ -41,6 +53,7 @@ const BuyingModal = () => {
         else{
             // dispatch(spendTokensAsyncAction(selectedAmount * price));
         }
+        dispatch(setMarketProductsDiscordNameAction(discordName));
         dispatch(setMarketProductHowMuchAction(selectedAmount));
         dispatch(setBlockchainTransactionStatus(1));
         dispatch(setMarketProductsShowModalAction(false));
@@ -75,7 +88,7 @@ const BuyingModal = () => {
     if(!selectedProduct) {
         return null;
     }
-    const { name, amount, price, category, deadline, address  } = selectedProduct;
+    const { name, amount, price, category, deadline, address, type  } = selectedProduct;
     const handleMinusClick = () =>{
         if( selectedAmount === 1) return;
         setSelectedAmount(prev => prev - 1);
@@ -96,7 +109,6 @@ const BuyingModal = () => {
   return (
     <Modal
         isOpen={isOpen}
-        preventScroll
         contentLabel="buying modal"
         onRequestClose={handleModalClose}
         shouldCloseOnOverlayClick={true}
@@ -112,6 +124,7 @@ const BuyingModal = () => {
             {category === 2 ?<DataContainer>{`last bid: ${price} tokens`}</DataContainer> : <DataContainer>{`price per unit: ${price}`}</DataContainer>}
             {category === 2 ? <DataContainer>{`last bidder: ${address ? `${address.substring(0, 10)}...${address.substring(38, 44)}` : "no one"}`}</DataContainer> : <DataContainer style={{visibility: 'hidden'}}/>}
             {category === 2 ? <DataContainer style={{marginTop: '30px'}}>{date.toDateString()}</DataContainer> : <DataContainer style={{ visibility: 'hidden'}} />}
+            {type === 1 && <InputLine type="text" placeholder='Discord Name:' onChange= {(e) => setDiscordName(e.target.value)}/>}
             </InfoContainer>
         </HeaderContainer>
         <ContentContainer>

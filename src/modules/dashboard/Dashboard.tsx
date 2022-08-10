@@ -14,6 +14,8 @@ const Dashboard = () => {
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState(categories[0]);
     const [amount, setAmount] = useState('');
+    const [discordLink, setDiscordLink] = useState('');
+    const [twitterLink, setTwitterLink] = useState('');
     const [imageUrl, setImageUrl] = useState<any>('');
     const [imageToUpload, setImageToUpload] = useState<File | null>(null);
     const [type, setType] = useState(types[0]);
@@ -28,7 +30,7 @@ const Dashboard = () => {
     },[imageToUpload])
     const handleSubmit = async (e : any) =>{
         e.preventDefault();
-        dispatch(addNewCollectionActionAsync({name, price, category, amount, type, imageToUpload, startDate}));
+        dispatch(addNewCollectionActionAsync({name, price, category, amount, type, imageToUpload, startDate, discordLink, twitterLink}));
       }  
     return (
     <Layout>
@@ -57,6 +59,12 @@ const Dashboard = () => {
 
           </SelectForm>
           </SelectionLine>
+          { type === '1' && 
+            <>
+              <InputLine type="text" placeholder='Discord:' onChange= {(e) => setDiscordLink(e.target.value)}/>
+              <InputLine type="text" placeholder='Twitter:' onChange= {(e) => setTwitterLink(e.target.value)}/>
+            </>
+          }   
           </InputLineWrapper>
       {category === '2' && <div style={{ alignSelf: 'center', zIndex: 1000}}><DatePicker minDate={new Date(Date.now())} selected={startDate} onChange={(date:Date) => setStartDate(date)} /> </div>}
         <PhotoInput type="file" onChange={(e) => setImageToUpload(e.target?.files?.length ? e.target.files[0] : null)} />

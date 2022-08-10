@@ -12,6 +12,7 @@ export const mapTransactions = (transaction : ITransactionHistoryResponse): ITra
     name: toString(transaction?.name),
     amount: toNumber(transaction?.amount),
     createdAt: toNumber(transaction?.createdAt.seconds * 1000),
+    discordName: toString(transaction?.discordName) || '',
     address: toString(transaction?.address),
     howMuch: toNumber(transaction?.howMuch),
 });

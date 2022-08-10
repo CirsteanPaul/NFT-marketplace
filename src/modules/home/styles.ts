@@ -40,7 +40,7 @@ export const EarnInfo = styled.p`
         font-size: 20px;
         width: 80%;
         text-align: center;
-        align-self: center;
+        align-self:center;
     }
 `;
 
@@ -49,6 +49,7 @@ export const InformationTitle = styled.h3`
     color: white;
     width: 100%;
     letter-spacing: 1.7px;
+    align-self: center;
     @media screen and (max-width: 982px){
         font-size: 40px;
         width: 80%;
@@ -86,6 +87,7 @@ export const JoinDiscordButton = styled.button`
     outline: 0;
     padding: 10px 20px;
     padding-left: 0;
+    z-index: 10;
     min-width: 250px;
     color: rgba(43, 160, 226, 1);
     font-size: 24px;

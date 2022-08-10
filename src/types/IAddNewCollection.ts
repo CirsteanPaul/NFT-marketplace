@@ -4,6 +4,8 @@ interface IAddNewCollection {
     category: number,
     amount: number,
     type: number,
+    discordLink?: string,
+    twitterLink?: string,
     imageToUpload: File | null,
     startDate: Date,
 }

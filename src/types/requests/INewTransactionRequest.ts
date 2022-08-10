@@ -3,6 +3,7 @@ interface INewTransactionRequest{
     amount: number,
     createdAt: Date,
     name: string,
+    discordName: string,
     howMuch: number,
 }
 export default INewTransactionRequest;

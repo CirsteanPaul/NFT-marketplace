@@ -46,7 +46,7 @@ gap: 20px;
 width: 330px;
 height: 240px;
 left: -14px;
-top: 80%;
+top: 85%;
 border-radius: 5px;
 padding: 10px;
 padding-left: 10px;
@@ -57,9 +57,9 @@ background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) -1.52%, rgba(255, 25
 /* backdrop-filter: blur(120px); */
 @media screen and (max-width:520px){
         width: 290px;
-        height: 230px;
+        height: 250px;
         gap: 10px;
-        top: 60%;
+        top: 65%;
         left: -7%
     }
 `;
@@ -135,4 +135,27 @@ export const ButtonsSection = styled.div`
     justify-content: center;
     gap: 10px;
     
+`;
+export const SocialContainer = styled.div`
+    display:flex;
+     margin: -18px 0;
+    flex-direction: row;
+     gap: 10px;
+    align-items:center;
+    @media screen and (max-width: 520px){
+        margin: -7px 0;
+    }
+`;
+export const SocialLinkButton = styled.button`
+    outline: 0;
+    border: 0;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    &:hover{
+        cursor: pointer;
+        outline: 0;
+        border: 0;
+    }
 `;
