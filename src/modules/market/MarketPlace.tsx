@@ -33,9 +33,9 @@ const MarketPlace = () => {
     else if(location.pathname === nftPage)
         return "NFTS";
     else if(location.pathname === merchPage)
-        return "Merchs";
+        return "Merch";
     else if(location.pathname === otherPage)
-        return "Others";
+        return "RockVerse";
     else return "Unknown";
     },[location.pathname]);
     const shownMarketProducts = useMemo(() =>{

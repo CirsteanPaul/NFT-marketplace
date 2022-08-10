@@ -6,17 +6,21 @@ import { deleteMarketProductActionAsync, setMarketProductsShowModalAction, setMe
 import { postNewTransactionActionAsync } from '../../store/actions/transaction-actions';
 import { blockchainAccountSelector, blockchainTransactionStatusSelector } from '../../store/selectors/blockchain-selectors';
 import { contractInfoIsAdminSelector } from '../../store/selectors/contract-info-selectors';
-import { marketPlaceHowMuchSelector, marketPlaceSelectedItemSelector } from '../../store/selectors/market-products-selectors';
+import { marketPlaceDiscordNameSelector, marketPlaceHowMuchSelector, marketPlaceSelectedItemSelector } from '../../store/selectors/market-products-selectors';
 import IMarketProduct from '../../types/IMarketProduct';
-import { ButtonsSection, BuyButton, DeleteButton, LateItemData, LatestItemImage, LatestItemName, LatestItemPrice, LatestItemSectionContainer, LatestItemTokenPrice } from './styles'
+import { ButtonsSection, BuyButton, DeleteButton, LateItemData, LatestItemImage, LatestItemName, LatestItemPrice, LatestItemSectionContainer, LatestItemTokenPrice, SocialContainer, SocialLinkButton } from './styles'
+import { ReactComponent as Discord } from './discord.svg';
+import { ReactComponent as Twitter } from './twitter.svg';
+
 type Props = {
     product: IMarketProduct;
 }
 const BidItem = (props: Props) => {
-    const {amount, photo, price, name, id, deadline, address } = props.product;
+    const {amount, photo, price, name, id, deadline, address, twitterLink, discordLink } = props.product;
     const dispatch = useAppDispatch();
     const isAdmin = useAppSelector(contractInfoIsAdminSelector);
     const accountAddress= useAppSelector(blockchainAccountSelector);
+    const discordName = useAppSelector(marketPlaceDiscordNameSelector);
     const transactionStatus = useAppSelector(blockchainTransactionStatusSelector);
     const howMuch = useAppSelector(marketPlaceHowMuchSelector);
     const selectedItem = useAppSelector(marketPlaceSelectedItemSelector);
@@ -63,6 +67,7 @@ const BidItem = (props: Props) => {
             address: accountAddress,
             amount: price,
             name,
+            discordName,
             howMuch: howMuch,
             createdAt: new Date(Date.now()),
         }));
@@ -81,6 +86,11 @@ const BidItem = (props: Props) => {
             <LatestItemName>{name}</LatestItemName>
             <LatestItemPrice>{`${amount} bundle`}</LatestItemPrice>
             </div>
+            <SocialContainer >
+            {(discordLink || twitterLink) && <LatestItemPrice>Social links:</LatestItemPrice>}
+              {twitterLink && <SocialLinkButton onClick={() => window.open(twitterLink, '_blank')}><Twitter /></SocialLinkButton>}
+              {discordLink && <SocialLinkButton onClick={() => window.open(discordLink, '_blank')}><Discord /></SocialLinkButton>}
+            </SocialContainer>
             <LatestItemTokenPrice>{`Last bid: ${price} tokens`}</LatestItemTokenPrice>
             {date > nowDate ? <LatestItemTokenPrice>{`Untill ${date.toDateString()}`}</LatestItemTokenPrice> : <LatestItemTokenPrice>{`Winner ${address?.substring(0,15)}`}</LatestItemTokenPrice>}
             <ButtonsSection>

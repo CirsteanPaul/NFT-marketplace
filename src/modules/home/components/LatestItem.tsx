@@ -19,11 +19,11 @@ const LatestItem = () => {
     }
     if(!latestItem) return null;
   return (
-    <LatestItemSectionContainer onClick={handleClick}>
+    <LatestItemSectionContainer >
         <LatestItemTitle>Latest Item</LatestItemTitle>
         <div style={{ position: "relative"}}>
-        <LatestItemImage src = {latestItem.photo}></LatestItemImage>
-        <LateItemData>
+        <LatestItemImage onClick={handleClick} src = {latestItem.photo}></LatestItemImage>
+        <LateItemData onClick={handleClick}>
             <LatestItemName>{latestItem.name}</LatestItemName>
             <LatestItemPrice>Price</LatestItemPrice>
             <LatestItemTokenPrice>{`${latestItem.price} tokens`}</LatestItemTokenPrice>

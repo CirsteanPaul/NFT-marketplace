@@ -21,12 +21,15 @@ export const modalStyles = {
       overlay: {
         backgroundColor: "rgba(0,0,0, .9)",
         zIndex: 100000,
-    }
+      }
 };
 export const Wrapper = styled.div`
     @media screen and (max-width: 900px){
         flex-direction: column;
         gap: 30px;
+    }
+    @media screen and (max-width: 600px){
+        gap: 10px;
     }
 `;
 export const HeaderContainer = styled.div`
@@ -44,6 +47,13 @@ export const InfoContainer = styled.div`
     align-items: center;
     margin-bottom: 100px;
     gap: 20px;
+    @media screen and (max-width: 600px){
+        gap: 10px;
+        margin: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 `;
 export const CloseButton = styled.button`
     border: 0;
@@ -61,6 +71,10 @@ export const CloseButton = styled.button`
         cursor: pointer;
         outline: 0;
         border: 0;
+    }
+    @media screen and (max-width: 600px){
+        font-size: 16px;
+        padding: 10px 15px;
     }
 `;
 export const ContentContainer = styled.div`
@@ -87,8 +101,14 @@ export const DataContainer = styled.div`
     border-radius:  10px;
     background: linear-gradient(90deg, rgba(26, 54, 94, 0.6) -3.84%, rgba(26, 54, 94, 0.5) 133.08%);
     align-items:center;
-    @media screen and (max-width: 90px){
+    @media screen and (max-width: 900px){
         width: 70%;
+    }
+    @media screen and (max-width: 600px){
+        gap: 10px;
+        min-height: 30px;
+        width: 40%;
+        font-size: 11px;
     }
 `;
 export const BuyingContainer = styled.div`
@@ -103,16 +123,21 @@ export const BuyingContainer = styled.div`
     border-radius:  10px;
     background: linear-gradient(90deg, rgba(26, 54, 94, 0.6) -3.84%, rgba(26, 54, 94, 0.5) 133.08%);
     align-items:center;
-    @media screen and (max-width: 90px){
+    @media screen and (max-width: 900px){
         width: 70%;
     }
+    @media screen and (max-width: 900px){
+        min-height: 100px;
+        padding: 20px;
+    }
+
 `;
 export const BuyingTitle = styled.h3`
     color:white;
     font-size: 25px;
     letter-spacing: 1.7px;
     @media screen and (max-width: 600px){
-        font-size: 20px;
+        font-size: 14px;
         letter-spacing: 1.3px;
     }
 `;
@@ -124,6 +149,10 @@ export const BuyItemContainer = styled.div`
     align-items: center;
     font-size: 24px;
     gap: 10px;
+    margin-bottom: 10px;
+    @media screen and (max-width: 600px){
+        font-size: 11px;
+    }
 `;
 export const StyledButton = styled.button`
     border: 0;
@@ -140,6 +169,11 @@ export const StyledButton = styled.button`
         outline: 0;
         border: 0;
     }
+    @media screen and (max-width: 600px){
+        font-size: 20px;
+        padding: 10px 15px;
+    }
+ 
 `;
 export const SelectionContainer = styled.div`
     padding: 10px;
@@ -148,6 +182,9 @@ export const SelectionContainer = styled.div`
     align-items: center;
     font-size: 24px;
     gap: 10px;
+    @media screen and (max-width: 600px){
+        padding: 0;
+    }
 `;
 export const InputAmount = styled.input`
      display: flex;
@@ -173,6 +210,7 @@ export const InputAmount = styled.input`
     @media screen and (max-width: 700px){
         width: 80%;
     }
+    
     :focus{
         outline: 0;
     }
@@ -194,6 +232,10 @@ export const BuyButton = styled.button`
         cursor: pointer;
         border: 0;
         outline: 0;
+    }
+    @media screen and (max-width: 600px){
+        font-size: 12px;
+        padding: 10px 15px;
     }
 `;
 export const ButtonsSection = styled.div`

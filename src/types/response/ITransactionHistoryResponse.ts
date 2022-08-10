@@ -7,6 +7,7 @@ interface ITransactionHistoryResponse {
     name: string,
     createdAt: firebaseTimestamp,
     amount: number,
+    discordName: string,
     address: string,
     howMuch: number,
 }

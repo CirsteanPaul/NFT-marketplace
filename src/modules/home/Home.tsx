@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { wlSpotsPage } from '../../constants/routing';
 import Layout from '../../layout'
 import { useAppDispatch } from '../../store';
 import { getLatestItemAsyncAction } from '../../store/actions/market-products-actions';
@@ -20,8 +21,8 @@ const Home = () => {
             <InformationTitle>Token exchange</InformationTitle>
             <EarnInfo>Earn tokens by staking your NFTs and exchange them for products</EarnInfo>
             <InfoButtonsSection>
-            <ExploreMoreButton onClick={() => navigate("/market-place")}>Explore items</ExploreMoreButton>
-            <JoinDiscordButton onClick={() => window.open("#","_blank")}>Join our Discord</JoinDiscordButton>
+            <ExploreMoreButton onClick={() => navigate(wlSpotsPage)}>Explore items</ExploreMoreButton>
+            <JoinDiscordButton onClick={() => window.open("https://discord.gg/rockstarapes","_blank")}>Join our Discord</JoinDiscordButton>
             </InfoButtonsSection>
         </InformationSectionContainer>
             <LatestItem />

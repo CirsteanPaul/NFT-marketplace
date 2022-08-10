@@ -10,13 +10,14 @@ import IMarketProduct from "../../types/IMarketProduct";
 import IAddNewCollectionRequest from "../../types/requests/IAddNewCollectionRequest";
 import IUpdateBidItemRequest from "../../types/requests/IUpdateBidItemRequest";
 import checkInputData from "../../utils/checkInputData";
-import {  MARKET_PRODUCTS__SET_LOADING, MARKET_PRODUCTS__SET, MARKET_PRODUCTS__UPDATE_BID_ITEM, MARKET_PRODUCTS__SET_SELECTED, MARKET_PRODUCTS__SET_SHOW_MODAL, MARKET_PRODUCTS__FETCH, MARKET_PLACE__GET_LATEST_ITEM, MARKET_PRODUCTS__SET_LATEST_ITEM, MARKET_PRODUCTS__DELETE, MARKET_PRODUCTS__ADD_NEW_COLLECTION, MARKET_PLACE__SET_HOW_MUCH } from "../constants";
+import {  MARKET_PRODUCTS__SET_LOADING, MARKET_PRODUCTS__SET, MARKET_PRODUCTS__SET_DISCORD_NAME, MARKET_PRODUCTS__UPDATE_BID_ITEM, MARKET_PRODUCTS__SET_SELECTED, MARKET_PRODUCTS__SET_SHOW_MODAL, MARKET_PRODUCTS__FETCH, MARKET_PLACE__GET_LATEST_ITEM, MARKET_PRODUCTS__SET_LATEST_ITEM, MARKET_PRODUCTS__DELETE, MARKET_PRODUCTS__ADD_NEW_COLLECTION, MARKET_PLACE__SET_HOW_MUCH } from "../constants";
 
 export const setMarketProductsLoading = createAction<boolean>(MARKET_PRODUCTS__SET_LOADING);
 export const setMarketProducts = createAction<IMarketProduct[]>(MARKET_PRODUCTS__SET);
 export const setMarketProductLatestItem = createAction<IMarketProduct>(MARKET_PRODUCTS__SET_LATEST_ITEM);
 export const setMerketProductSelectedItemAction = createAction<IMarketProduct | null>(MARKET_PRODUCTS__SET_SELECTED);
 export const setMarketProductsShowModalAction = createAction<boolean>(MARKET_PRODUCTS__SET_SHOW_MODAL);
+export const setMarketProductsDiscordNameAction = createAction<string>(MARKET_PRODUCTS__SET_DISCORD_NAME);
 export const setMarketProductHowMuchAction = createAction<number>(MARKET_PLACE__SET_HOW_MUCH);
 
 export const getLatestItemAsyncAction = createAsyncThunk(MARKET_PLACE__GET_LATEST_ITEM, async(__: never, thunkApi) =>{
@@ -75,7 +76,6 @@ export const addNewCollectionActionAsync = createAsyncThunk(MARKET_PRODUCTS__ADD
         const response = await uploadBytes(imageRef, imageToUpload);
         const imageLink = await getDownloadURL(imageRef);
             
-        console.log(imageLink)
         const realData = mapAddNewCollection(data);
         if(realData.category === 1){
             const request = {
@@ -84,12 +84,13 @@ export const addNewCollectionActionAsync = createAsyncThunk(MARKET_PRODUCTS__ADD
                 createdAt: new Date(Date.now()),
                 photo: imageLink,
                 category: realData.category,
+                discordLink: realData.discordLink,
+                twitterLink: realData.twitterLink,
                 price: realData.price,
                 type: realData.type,
             }
             await postNewCollection(request);
             const latestItem = await getLatestItem();
-            console.log(latestItem)
             await deleteLatestItem(latestItem[0]);
             await addLastetCollection(request);
         }
@@ -100,13 +101,14 @@ export const addNewCollectionActionAsync = createAsyncThunk(MARKET_PRODUCTS__ADD
                 createdAt: new Date(Date.now()),
                 deadline: realData.startDate,
                 category: realData.category,
+                discordLink: realData.discordLink,
+                twitterLink: realData.twitterLink,
                 photo: imageLink,
                 price: realData.price,
                 type: realData.type,
             }
             await postNewCollection(request);
             const latestItem = await getLatestItem();
-            console.log(latestItem)
             await deleteLatestItem(latestItem[0]);
             await addLastetCollection(request);
         }

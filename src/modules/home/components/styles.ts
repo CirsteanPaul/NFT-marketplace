@@ -17,9 +17,7 @@ export const LatestItemSectionContainer = styled.div`
         margin-left: -20px;
         display: none;
     }
-    &:hover{
-        cursor: pointer;
-    }
+ 
 `;
 export const LatestItemTitle = styled.p`
     color:white;
@@ -41,6 +39,9 @@ export const LatestItemImage = styled.img`
     @media screen and (max-width:520px){
         width: 250px;
         height: 250px;
+    }
+    &:hover{
+        cursor: pointer;
     }
 `;
 export const LateItemData = styled.div`
@@ -70,6 +71,9 @@ clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0% 50%);
         height: 230px;
         gap: 10px;
         top: 60%;
+    }
+    &:hover{
+        cursor: pointer;
     }
 `;
 export const LatestItemName = styled.p`

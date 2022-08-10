@@ -1,23 +1,26 @@
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { setBlockchainTransactionStatus, spendTokensAsyncAction } from '../../store/actions/blockchain-actions';
-import { deleteMarketProductActionAsync, setMarketProducts, setMarketProductsShowModalAction, setMerketProductSelectedItemAction, updateSellingItemActionAsync } from '../../store/actions/market-products-actions';
+import { setBlockchainTransactionStatus } from '../../store/actions/blockchain-actions';
+import { deleteMarketProductActionAsync, setMarketProductsShowModalAction, setMerketProductSelectedItemAction, updateSellingItemActionAsync } from '../../store/actions/market-products-actions';
 import { postNewTransactionActionAsync } from '../../store/actions/transaction-actions';
 import { blockchainAccountSelector, blockchainTransactionStatusSelector } from '../../store/selectors/blockchain-selectors';
 import { contractInfoIsAdminSelector } from '../../store/selectors/contract-info-selectors';
-import { marketPlaceHowMuchSelector, marketPlaceSelectedItemSelector } from '../../store/selectors/market-products-selectors';
+import { marketPlaceDiscordNameSelector, marketPlaceHowMuchSelector, marketPlaceSelectedItemSelector } from '../../store/selectors/market-products-selectors';
 import IMarketProduct from '../../types/IMarketProduct';
-import { ButtonsSection, BuyButton, DeleteButton, LateItemData, LatestItemImage, LatestItemName, LatestItemPrice, LatestItemSectionContainer, LatestItemTokenPrice } from './styles'
+import { ReactComponent as Discord } from './discord.svg';
+import { ReactComponent as Twitter } from './twitter.svg';
+import { ButtonsSection, BuyButton, DeleteButton, LateItemData, LatestItemImage, LatestItemName, LatestItemPrice, LatestItemSectionContainer, LatestItemTokenPrice, SocialContainer, SocialLinkButton } from './styles'
 type Props = {
     product: IMarketProduct;
 }
 const SellingItem = (props: Props) => {
-    const {amount, photo, price, name, id } = props.product;
+    const {amount, photo, price, name, id, discordLink, twitterLink } = props.product;
     const dispatch = useAppDispatch();
     const isAdmin = useAppSelector(contractInfoIsAdminSelector);
     const accountAddress= useAppSelector(blockchainAccountSelector);
     const howMuch = useAppSelector(marketPlaceHowMuchSelector);
+    const discordName = useAppSelector(marketPlaceDiscordNameSelector);
     const selectedItem = useAppSelector(marketPlaceSelectedItemSelector);
 
     const transactionStatus = useAppSelector(blockchainTransactionStatusSelector);
@@ -63,6 +66,7 @@ const SellingItem = (props: Props) => {
             address: accountAddress,
             amount: price,
             name,
+            discordName,
             howMuch,
             createdAt: new Date(Date.now()),
         }));
@@ -77,6 +81,11 @@ const SellingItem = (props: Props) => {
         <LatestItemImage src = {photo}></LatestItemImage>
         <LateItemData>
             <LatestItemName>{name}</LatestItemName>
+            <SocialContainer >
+            {(discordLink || twitterLink) && <LatestItemPrice>Social links:</LatestItemPrice>}
+              {discordLink && <SocialLinkButton onClick={() => window.open(twitterLink, '_blank')}><Twitter /></SocialLinkButton>}
+              {twitterLink && <SocialLinkButton onClick={() => window.open(discordLink, '_blank')}><Discord /></SocialLinkButton>}
+            </SocialContainer>
             <LatestItemPrice>{`supply: ${amount}`}</LatestItemPrice>
             <LatestItemTokenPrice>{`price: ${price} tokens`}</LatestItemTokenPrice>
             <ButtonsSection>

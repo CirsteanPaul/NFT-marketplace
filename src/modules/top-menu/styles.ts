@@ -68,3 +68,12 @@ export const ConnectButton = styled.button`
         outline: 0;
     }
 `;
+export const LogoContainer = styled.div`
+    padding: 0 10px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+        cursor: pointer;
+    }
+`;

@@ -75,32 +75,43 @@ export function MobileNavLinks(props: any) {
       {isOpen && (
         <LinksWrapper>
         <LinkItem>
-          <Link to={mainPage}><ItemLink>Home</ItemLink></Link>
+          <Link onClick={() => setOpen(false)} to={mainPage}><ItemLink>Home</ItemLink></Link>
           </LinkItem>
           <LinkItem>
-          <Link to={wlSpotsPage}><ItemLink>WL Spots</ItemLink></Link>
+          <ItemLink onClick = {() => {
+            window.open('https://etherscan.io/address/0x986b5281beab744aF0d2667519e48f8B28B974C0', '_blank')
+             setOpen(false)
+          }}
+          >Buy Rock Token</ItemLink>
           </LinkItem>
           <LinkItem>
-            <Link to={merchPage}><ItemLink>Merch</ItemLink></Link>
+          <Link onClick={() => setOpen(false)} to={wlSpotsPage}><ItemLink>WL Spots</ItemLink></Link>
             </LinkItem>
             <LinkItem>
-            <Link to={nftPage}><ItemLink>NFTs</ItemLink></Link>
+            <Link onClick={() => setOpen(false)} to={nftPage}><ItemLink>NFTs</ItemLink></Link>
             </LinkItem>
             <LinkItem>
-            <Link to={otherPage}><ItemLink>Others</ItemLink></Link>
+            <Link onClick={() => setOpen(false)} to={otherPage}><ItemLink>RockVerse</ItemLink></Link>
             </LinkItem>
-          <LinkItem>
-            <ItemLink onClick={() =>window.open("http://rockstarapes.io", "_self")}>Website</ItemLink>
+            <LinkItem>
+            <Link onClick={() => setOpen(false)} to={merchPage}><ItemLink>Merch</ItemLink></Link>
           </LinkItem>
           <LinkItem>
-            <ItemLink onClick={() =>window.open("https://staking.rockstarapes.io/", "_self")}>Staking</ItemLink>
+            <ItemLink onClick={() =>{
+               window.open("http://rockstarapes.io", "_self")
+                setOpen(false) }}>Website</ItemLink>
+          </LinkItem>
+          <LinkItem>
+            <ItemLink onClick={() => { 
+              window.open("https://staking.rockstarapes.io/", "_self")
+               setOpen(false)}}>Staking</ItemLink>
           </LinkItem>
 
           <LinkItem>
-            {isAdmin && <Link to={dashboardPage}><ItemLink>Dashboard</ItemLink></Link>}
+            {isAdmin && <Link onClick={() => setOpen(false)} to={dashboardPage}><ItemLink>Dashboard</ItemLink></Link>}
           </LinkItem>
           <LinkItem>
-          {isAdmin &&<Link to={transactionPage}><ItemLink>Transactions</ItemLink></Link>}
+          {isAdmin &&<Link onClick={() => setOpen(false)} to={transactionPage}><ItemLink>Transactions</ItemLink></Link>}
           </LinkItem>
           <LinkItem>
           {`Balance: ${balance} tokens`}

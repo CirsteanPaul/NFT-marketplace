@@ -87,6 +87,7 @@ export const JoinDiscordButton = styled.button`
     outline: 0;
     padding: 10px 20px;
     padding-left: 0;
+    z-index: 10;
     min-width: 250px;
     color: rgba(43, 160, 226, 1);
     font-size: 24px;

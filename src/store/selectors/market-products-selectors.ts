@@ -10,7 +10,7 @@ export const marketPlaceLatestItemSelector = (state: RootState) => state.marketP
 export const marketPlaceSelectedItemSelector = (state: RootState) => state.marketProducts.selectedItem;
 export const marketPlaceShowBuyingModalSelector = (state: RootState) => state.marketProducts.showModal;
 export const marketPlaceHowMuchSelector = (state: RootState) => state.marketProducts.howMuch;
-
+export const marketPlaceDiscordNameSelector = (state: RootState) => state.marketProducts.discordName;
 export const marketPlaceSortedByDateItemsSelector = (state: RootState) =>{
     const transactions = marketPlaceItemsSelector(state);
     return [...transactions].sort((a, b) => b.createdAt - a.createdAt);
