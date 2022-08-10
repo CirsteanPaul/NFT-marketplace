@@ -79,10 +79,10 @@ export function MobileNavLinks(props: any) {
           </LinkItem>
           <LinkItem>
           <ItemLink onClick = {() => {
-            window.open('https://etherscan.io/address/0x986b5281beab744aF0d2667519e48f8B28B974C0', '_blank')
+            window.open('https://opensea.io/collection/rockstarapesclub', '_blank')
              setOpen(false)
           }}
-          >Buy Rock Token</ItemLink>
+          >Buy Genesis Token</ItemLink>
           </LinkItem>
           <LinkItem>
           <Link onClick={() => setOpen(false)} to={wlSpotsPage}><ItemLink>WL Spots</ItemLink></Link>
