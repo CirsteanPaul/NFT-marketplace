@@ -48,10 +48,10 @@ const BuyingModal = () => {
                 });
             return;
            }
-            //dispatch(spendTokensAsyncAction(selectedAmount));
+            dispatch(spendTokensAsyncAction(selectedAmount));
         }
         else{
-            // dispatch(spendTokensAsyncAction(selectedAmount * price));
+            dispatch(spendTokensAsyncAction(selectedAmount * price));
         }
         dispatch(setMarketProductsDiscordNameAction(discordName));
         dispatch(setMarketProductHowMuchAction(selectedAmount));
