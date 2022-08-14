@@ -48,14 +48,22 @@ const BuyingModal = () => {
                 });
             return;
            }
-            //dispatch(spendTokensAsyncAction(selectedAmount));
+            dispatch(spendTokensAsyncAction(selectedAmount));
         }
         else{
-            // dispatch(spendTokensAsyncAction(selectedAmount * price));
+            if(!selectedProduct) return
+            if(selectedAmount > selectedProduct.amount){ Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "You can't purchase this amount",
+                customClass: { container: 'popup'}
+                });
+            return;
+           }
+            dispatch(spendTokensAsyncAction(selectedAmount * price));
         }
         dispatch(setMarketProductsDiscordNameAction(discordName));
         dispatch(setMarketProductHowMuchAction(selectedAmount));
-        dispatch(setBlockchainTransactionStatus(1));
         dispatch(setMarketProductsShowModalAction(false));
     }
     useEffect(() =>{

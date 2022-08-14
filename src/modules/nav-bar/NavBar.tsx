@@ -20,7 +20,7 @@ const NavBar = () => {
              <Link to={mainPage}><HomeIcon /></Link>}
             </HomeIconContainer>
             <MenuItemsContainer>
-            <MenuItem active={false} onClick = {() => window.open('https://opensea.io/collection/rockstarapesclub', '_blank')}>Buy Genesis Token</MenuItem>
+            <MenuItem active={false} onClick = {() => window.open('https://opensea.io/collection/rockstarapesclub', '_blank')}>Buy Genesis Apes</MenuItem>
             <Link to={wlSpotsPage}><MenuItem active = {location.pathname === wlSpotsPage}>WL Spots</MenuItem></Link>
             <Link to={nftPage}><MenuItem active = {location.pathname === nftPage}>NFTs</MenuItem></Link>
             <Link to={otherPage}><MenuItem active = {location.pathname === otherPage}>RockVerse</MenuItem></Link>

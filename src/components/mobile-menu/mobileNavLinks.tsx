@@ -82,7 +82,7 @@ export function MobileNavLinks(props: any) {
             window.open('https://opensea.io/collection/rockstarapesclub', '_blank')
              setOpen(false)
           }}
-          >Buy Genesis Token</ItemLink>
+          >Buy Genesis Apes</ItemLink>
           </LinkItem>
           <LinkItem>
           <Link onClick={() => setOpen(false)} to={wlSpotsPage}><ItemLink>WL Spots</ItemLink></Link>
