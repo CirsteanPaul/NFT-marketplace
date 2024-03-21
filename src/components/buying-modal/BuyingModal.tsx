@@ -1,13 +1,11 @@
-import { id } from 'ethers/lib/utils';
 import React, { useMemo, useState } from 'react'
 import { useEffect } from 'react';
 import Modal from 'react-modal';
 import Swal from 'sweetalert2';
 import { InputLine } from '../../modules/dashboard/styles';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { setBlockchainTransactionStatus, spendTokensAsyncAction } from '../../store/actions/blockchain-actions';
+import { spendTokensAsyncAction } from '../../store/actions/blockchain-actions';
 import { setMarketProductHowMuchAction, setMarketProductsDiscordNameAction, setMarketProductsShowModalAction, setMerketProductSelectedItemAction } from '../../store/actions/market-products-actions';
-import { blockchainAccountSelector } from '../../store/selectors/blockchain-selectors';
 import { contractInfoBalanceSelector } from '../../store/selectors/contract-info-selectors';
 import { marketPlaceSelectedItemSelector, marketPlaceShowBuyingModalSelector } from '../../store/selectors/market-products-selectors';
 import { BuyingContainer, BuyingTitle, BuyItemContainer, CloseButton, ContentContainer, DataContainer, HeaderContainer, InputAmount, modalStyles, Wrapper, StyledButton, SelectionContainer, InfoContainer, BuyButton } from './styles';
@@ -19,9 +17,7 @@ const BuyingModal = () => {
     const [selectedAmount, setSelectedAmount] = useState(1);
     const [discordName, setDiscordName] = useState('');
     const balance = useAppSelector(contractInfoBalanceSelector);
-    const accountAddress= useAppSelector(blockchainAccountSelector);
     const selectedProduct = useAppSelector(marketPlaceSelectedItemSelector);
-    const nowDate = new Date(Date.now());
     const date = useMemo(() => selectedProduct?.deadline ? new Date(selectedProduct?.deadline) : new Date(Date.now()), [selectedProduct?.deadline]);
     const handleModalClose = () =>{
         dispatch(setMerketProductSelectedItemAction(null));
@@ -29,14 +25,14 @@ const BuyingModal = () => {
     }
     const handleBuyClick = () =>{
         if(type === 1 && discordName === '') {
-            { Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: "Please provide your discord name, for the wl spots",
-                customClass: { container: 'popup'}
-                });
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Please provide your discord name, for the wl spots",
+            customClass: { container: 'popup'}
+            });
+            
             return;
-           }
         } 
         if(category === 2){
             if(selectedAmount < price)
@@ -96,7 +92,7 @@ const BuyingModal = () => {
     if(!selectedProduct) {
         return null;
     }
-    const { name, amount, price, category, deadline, address, type  } = selectedProduct;
+    const { name, amount, price, category, address, type  } = selectedProduct;
     const handleMinusClick = () =>{
         if( selectedAmount === 1) return;
         setSelectedAmount(prev => prev - 1);

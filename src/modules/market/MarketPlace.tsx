@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../store'
 import { setBlockchainTransactionStatus } from '../../store/actions/blockchain-actions'
 import { fetchMarketProducts } from '../../store/actions/market-products-actions'
 import { blockchainTransactionLoadingSelector, blockchainTransactionStatusSelector } from '../../store/selectors/blockchain-selectors'
-import {  marketPlaceLoadingSelector, marketPlaceMerchItemsSelector, marketPlaceNFTItemsSelector, marketPlaceOthersItemsSelector, marketPlaceSortedByDateItemsSelector, marketPlaceWlSpotsItemsSelector } from '../../store/selectors/market-products-selectors'
+import {  marketPlaceLoadingSelector, marketPlaceMerchItemsSelector, marketPlaceNFTItemsSelector, marketPlaceOthersItemsSelector, marketPlaceWlSpotsItemsSelector } from '../../store/selectors/market-products-selectors'
 import { MainSection, MarketPlaceContainer, PageTitle } from './styles'
 
 const MarketPlace = () => {
@@ -81,7 +81,7 @@ const MarketPlace = () => {
                 });
         }
         dispatch(setBlockchainTransactionStatus(0));
-    },[transactionStatus]);
+    },[dispatch, transactionStatus]);
     if(marketPlaceLoading)
         return <Layout></Layout>
   return (

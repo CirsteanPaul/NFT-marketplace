@@ -1,4 +1,3 @@
-import React from 'react'
 import { HomeIconContainer, LogoContainer, MenuContainer, MenuItem, MenuItemsContainer, NavBarContainer } from './styles';
 import {ReactComponent as HomeIcon} from './home-icon.svg'
 import {ReactComponent as RedHomeIcon} from './hovered-icon.svg'

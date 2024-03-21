@@ -51,7 +51,7 @@ export const fetchMarketProducts = createAsyncThunk(MARKET_PRODUCTS__FETCH, asyn
 });
 export const deleteMarketProductActionAsync = createAsyncThunk(MARKET_PRODUCTS__DELETE, async(id: string, thunkApi) =>{
     try {
-        const response = await deleteMarketProductRequest(id);
+        await deleteMarketProductRequest(id);
         thunkApi.dispatch(fetchMarketProducts());
     }catch{
         // swallow exception
@@ -73,7 +73,7 @@ export const addNewCollectionActionAsync = createAsyncThunk(MARKET_PRODUCTS__ADD
         const imageName = imageToUpload.name + v4()
         console.log(imageName,storage);
         const imageRef = ref(storage, `images/${imageName} `)   
-        const response = await uploadBytes(imageRef, imageToUpload);
+        await uploadBytes(imageRef, imageToUpload);
         const imageLink = await getDownloadURL(imageRef);
             
         const realData = mapAddNewCollection(data);

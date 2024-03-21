@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import Swal from 'sweetalert2';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { setBlockchainTransactionStatus, spendTokensAsyncAction } from '../../store/actions/blockchain-actions';
+import { setBlockchainTransactionStatus } from '../../store/actions/blockchain-actions';
 import { deleteMarketProductActionAsync, setMarketProductsShowModalAction, setMerketProductSelectedItemAction, updateBidItemActionAsync } from '../../store/actions/market-products-actions';
 import { postNewTransactionActionAsync } from '../../store/actions/transaction-actions';
 import { blockchainAccountSelector, blockchainTransactionStatusSelector } from '../../store/selectors/blockchain-selectors';
@@ -76,7 +76,7 @@ const BidItem = (props: Props) => {
         dispatch(setMerketProductSelectedItemAction(null));
         dispatch(setBlockchainTransactionStatus(0));
     }
-    },[transactionStatus]);
+    },[accountAddress, discordName, dispatch, howMuch, id, name, price, props.product.id, selectedItem?.id, transactionStatus]);
   return (
     <LatestItemSectionContainer>
         <div style={{ position: "relative"}}>

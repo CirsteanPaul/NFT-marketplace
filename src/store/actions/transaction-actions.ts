@@ -26,7 +26,7 @@ export const fetchDatabaseTransactionsHistory = createAsyncThunk(TRANSACTIONS__F
 });
 export const postNewTransactionActionAsync = createAsyncThunk(TRANSACTIONS_POST_NEW_TRANSACTION, async( data: INewTransactionRequest, thunkApi) =>{
     try {
-        const response = await postNewTransaction(data);
+        await postNewTransaction(data);
     }
     catch (e){
         console.log(e);

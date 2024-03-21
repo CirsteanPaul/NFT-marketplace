@@ -23,7 +23,6 @@ const Dashboard = () => {
     useEffect(() =>{
         if(!imageToUpload) return;
         const reader = new FileReader();
-        const url = reader.readAsDataURL(imageToUpload);
         reader.onloadend = function (e) {
             setImageUrl([reader.result])
           }

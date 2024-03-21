@@ -1,12 +1,8 @@
-import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../store'
 import { disconnectBlockchainInfo, fecthBlockchainInfoAsyncAction } from '../../store/actions/blockchain-actions'
 import { blockchainIsConnectedSelector } from '../../store/selectors/blockchain-selectors'
 import { contractInfoBalanceSelector, contractInfoLoadingSelector } from '../../store/selectors/contract-info-selectors'
 import { BalanceContainer, ConnectButton, LeftSide, RedirectButton, RightSide, TopMenuContainer } from './styles'
-import { ReactComponent as OpenseaLogo } from './opensea-logo.svg';
-import { ReactComponent as TwitterLogo } from './twitter-logo.svg';
-import { LogoContainer } from './styles'
 
 const TopMenu = () => {
     const dispatch = useAppDispatch();
